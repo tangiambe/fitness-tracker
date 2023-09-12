@@ -8,16 +8,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cognixia.jump.model.Calorie;
 import com.cognixia.jump.model.Days;
 import com.cognixia.jump.model.Goal;
+import com.cognixia.jump.model.Nutrition;
 import com.cognixia.jump.model.Tracker;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.model.User.Role;
 import com.cognixia.jump.model.User.TrackType;
-import com.cognixia.jump.repository.CalorieRepository;
 import com.cognixia.jump.repository.DaysRepository;
 import com.cognixia.jump.repository.GoalRepository;
+import com.cognixia.jump.repository.NutritionRepository;
 import com.cognixia.jump.repository.TrackerRepository;
 import com.cognixia.jump.repository.UserRepository;
 
@@ -28,7 +28,7 @@ public class ControllerService {
 	DaysRepository daysRepo;
 	
 	@Autowired 
-	CalorieRepository calorieRepo;
+	NutritionRepository nutritionRepo;
 	
 	@Autowired 
 	GoalRepository goalRepo;
@@ -38,6 +38,9 @@ public class ControllerService {
 	
 	@Autowired 
 	TrackerRepository trackerRepo;
+	
+	@Autowired 
+	NutritionAPIService nutritonService;
 	
     public Optional<Goal> findGoalByTrackType(TrackType trackType) {
     	return goalRepo.findByTrackType(trackType);
@@ -80,10 +83,19 @@ public class ControllerService {
 		return daysRepo.getAllDaysByUserId(id);
 	}
 	
-	
-	
-//	public List<Calorie> getCalorieByUserId(Integer userId){
-//		return calorieRepo.findAllByDays_User_Id(userId);
-//	}
-	
+	public Tracker addFood(Tracker tracker, Nutrition nutrition) {
+		
+		List<Nutrition> nutritionList= tracker.getNutritions();
+		nutritionList.add(nutrition);
+		tracker.setNutritions(nutritionList);
+		tracker.setTotalCalories(nutrition.getFoodCalories() + 
+								tracker.getTotalCalories());
+		
+		System.out.println("Total Calories: " + tracker.getTotalCalories()
+							+ "\nFood Calories: " + nutrition.getFoodCalories());
+		tracker = trackerRepo.save(tracker);
+		nutrition.setTracker(tracker);
+		nutritionRepo.save(nutrition);
+		return tracker;
+	}
 }
