@@ -27,7 +27,7 @@ public class Tracker implements Serializable {
 		
 	private int steps;
 	
-	private int totalCalories;
+	private float totalCalories;
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -35,7 +35,7 @@ public class Tracker implements Serializable {
 	private User user;
 	
 	@OneToMany(mappedBy = "tracker", cascade = CascadeType.ALL)
-	private List<Calorie> calories ;
+	private List<Nutrition> nutrition ;
 		
 	@OneToMany(mappedBy = "tracker", cascade = CascadeType.ALL)
 	private List<Days> Days ;
@@ -44,22 +44,22 @@ public class Tracker implements Serializable {
 	
 	public Tracker() {}
 
-	public Tracker(Integer id, int steps, int totalCalories, User user, List<Calorie> calories, int goalId) {
+	public Tracker(Integer id, int steps, float totalCalories, User user, List<Nutrition> nutrition, int goalId) {
 		super();
 		this.id = id;
 		this.steps = steps;
 		this.totalCalories = totalCalories;
 		this.user = user;
-		this.calories = calories;
+		this.nutrition = nutrition;
 		this.goalId = goalId;
 	}
-	public Tracker(int steps, int totalCalories, int goalId, User user, List<Calorie> calories) {
+	public Tracker(int steps, float totalCalories, int goalId, User user, List<Nutrition> nutrition) {
 		super();
 		this.steps = steps;
 		this.totalCalories = totalCalories;
 		this.user = user;
 		this.goalId = goalId;
-		this.calories = calories;
+		this.nutrition = nutrition;
 	}
 	
 
@@ -79,7 +79,6 @@ public class Tracker implements Serializable {
 		this.steps = steps;
 	}
 
-
 //	public User getUser() {
 //		return user;
 //	}
@@ -97,23 +96,23 @@ public class Tracker implements Serializable {
 		
 	}
 	
-	public List<Calorie> getCalories() {
-		return calories;
+	public List<Nutrition> getNutritions() {
+		return nutrition;
 	}
 
-	public void setCalories(List<Calorie> calories) {
-		this.calories = calories;
+	public void setNutritions(List<Nutrition> nutritions) {
+		this.nutrition = nutritions;
 	}
 
-	public void setTotalCalories(int totalCalories) {
+	public void setTotalCalories(float totalCalories) {
 		this.totalCalories = totalCalories;
 	}
 
-	public int getTotalCalories() {
+	public float getTotalCalories() {
 		return totalCalories;
 	}
 	
-	public void resetTotal() {
+	public void resetTotalCalories() {
 		totalCalories = 0;
 	}
 }
