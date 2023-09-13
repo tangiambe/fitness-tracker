@@ -1,43 +1,59 @@
-import { createSlice } from "@reduxjs/toolkit"
-
-
-const initialState = {
-
-    _id: "-1",
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    password: ""
-        
-    
-}
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
-    name: 'user', 
-    initialState,
-    reducers: {
-        login: (state, action) => {
-            const {_id, firstName, lastName, username, email, password} = action.payload;
-            // console.log(`Action.payload: ${JSON.stringify(action.payload)}`)
-            state._id = _id;
-            state.firstName = firstName;
-            state.lastName = lastName;
-            state.username = username;
-            state.email = email;
-            state.password = password;
+  name: "user",
+  initialState: {
+    value: {
+      fname: "",
+      lname:"",
+      username:"",
+      email: "",
+      password: "",
+      nextPermation: false,
+      nextClick: false,
+      emailValid:false,
+      plan:"",
+      price:0,
+      plantime:"",
+      totalToPay:0,
+      packs:[
+        {
+          title: "Online service",
+          text: "Access to multiplayer games",
+          price: {
+            monthly: 1,
+            yearly: 10,
+          },
+          addon: false,
         },
-        logout: (state) => {
-            state._id = "-1";
-            state.firstName = "";
-            state.lastName = "";
-            state.username = "";
-            state.email = "";
-            state.password = "";
+        {
+          title: "Larger storage",
+          text: "Extra 1TB of cloud save",
+          price: {
+            monthly: 2,
+            yearly: 20,
+          },
+          addon: false,
+        },
+        {
+          title: "Customizable profile",
+          text: "Custom theme on your profile",
+          price: {
+            monthly: 2,
+            yearly: 20,
+          },
+          addon: false,
         }
+      ]
+
+    },
+  },
+  reducers: {
+    info: (state, action) => {
+      state.value = action.payload;
     }
-})
-
-export const {login, logout} = userSlice.actions;
-
-export default userSlice.reducer
+    // login/logout reducers
+  },
+});
+export const { info } = userSlice.actions;
+export default userSlice.reducer;

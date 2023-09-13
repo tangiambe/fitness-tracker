@@ -30,7 +30,7 @@ export const Home = () => {
                             <h4>Ready to Start your Journey?</h4>
                         </Container>
                         <Container className="text-center">
-                            <Button href="#" className="register-btn">Register</Button>
+                            <Button href="/register" className="register-btn">Register</Button>
                             <Button href="#" className="login-btn">Login</Button>
                         </Container>
                     </Row>
