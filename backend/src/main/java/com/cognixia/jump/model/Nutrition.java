@@ -35,8 +35,10 @@ public class Nutrition implements Serializable {
 	private float carbohydrates_total_g;
 	private float fiber_g;
 	private float sugar_g;
+	private int quantity;
+	private float totalServingSize;
+	private float totalCalories;
 	
-
     @ManyToOne
     @JoinColumn(name = "goal_id", referencedColumnName = "id")
     private Tracker tracker;
@@ -225,6 +227,39 @@ public class Nutrition implements Serializable {
 	public void setTracker(Tracker tracker) {
 		this.tracker = tracker;
 	}
+	
+	
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public float getTotalServingSize() {
+		return totalServingSize;
+	}
+
+	public void setTotalServingSize(float totalServingSize) {
+		this.totalServingSize = totalServingSize;
+	}
+
+	public float getTotalCalories() {
+		return totalCalories;
+	}
+
+	public void setTotalCalories(float totalCalories) {
+		this.totalCalories = totalCalories;
+	}
+	
+	public void resetTotals() {
+		this.quantity = 0;
+		this.totalServingSize = 0;
+		this.totalCalories = 0;
+	}
+	
 
 	@Override
 	public String toString() {

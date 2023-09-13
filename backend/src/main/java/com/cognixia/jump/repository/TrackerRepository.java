@@ -8,4 +8,5 @@ import com.cognixia.jump.model.Tracker;
 @Repository
 public interface TrackerRepository extends JpaRepository<Tracker, Integer>  {
 
+	
 }

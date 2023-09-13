@@ -12,13 +12,16 @@ import com.cognixia.jump.model.Nutrition;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
 
 @Service
 public class NutritionAPIService {
 	
     private final String apiKey = "fwVJKoc49pr10UaaoZMCXA==aowoqOVFspMQIjy9"; // Replace with your actual API key
 
-	
 	 public Optional<Nutrition> parseAPI(String query) {
 	        try {
 	            String apiUrl = "https://api.api-ninjas.com/v1/nutrition?query=" + query;
