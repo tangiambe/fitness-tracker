@@ -24,7 +24,7 @@ export const NavBar = () => {
                         <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 align-items-center">
                                     <Nav.Item className=" nav-link px-3 py-2">
-                                        <Nav.Link href="#" className="fw-bold">
+                                        <Nav.Link href="/register" className="fw-bold">
                                             Register
                                         </Nav.Link>
                                     </Nav.Item>
