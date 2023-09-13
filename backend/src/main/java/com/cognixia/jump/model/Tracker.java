@@ -1,6 +1,7 @@
 package com.cognixia.jump.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -9,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -29,6 +31,8 @@ public class Tracker implements Serializable {
 	
 	private float totalCalories;
 	
+	private LocalDate entryDate;
+	
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id",  unique = true)
@@ -40,25 +44,27 @@ public class Tracker implements Serializable {
 	@OneToMany(mappedBy = "tracker", cascade = CascadeType.ALL)
 	private List<Days> Days ;
 
-	private int goalId;
+	 @ManyToOne
+	 @JoinColumn(name = "goal_id", referencedColumnName = "id")
+	 private Goal goal;
 	
 	public Tracker() {}
 
-	public Tracker(Integer id, int steps, float totalCalories, User user, List<Nutrition> nutrition, int goalId) {
+	public Tracker(Integer id, int steps, float totalCalories, User user, List<Nutrition> nutrition, Goal goal) {
 		super();
 		this.id = id;
 		this.steps = steps;
 		this.totalCalories = totalCalories;
 		this.user = user;
 		this.nutrition = nutrition;
-		this.goalId = goalId;
+		this.goal = goal;
 	}
-	public Tracker(int steps, float totalCalories, int goalId, User user, List<Nutrition> nutrition) {
+	public Tracker(int steps, float totalCalories, Goal goal, User user, List<Nutrition> nutrition) {
 		super();
 		this.steps = steps;
 		this.totalCalories = totalCalories;
 		this.user = user;
-		this.goalId = goalId;
+		this.goal = goal;
 		this.nutrition = nutrition;
 	}
 	
@@ -86,16 +92,13 @@ public class Tracker implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@Override
+	public String toString() {
+		return "Tracker [id=" + id + ", steps=" + steps + ", totalCalories=" + totalCalories + ", user=" + user
+				+ ", nutrition=" + nutrition + ", Days=" + Days + ", goal=" + goal + "]";
+	}
 
-	public int getGoalId() {
-		return goalId;
-	}
-	
-	public void setGoalId(int goalId) {
-		this.goalId = goalId;
-		
-	}
-	
 	public List<Nutrition> getNutritions() {
 		return nutrition;
 	}
@@ -115,4 +118,24 @@ public class Tracker implements Serializable {
 	public void resetTotalCalories() {
 		totalCalories = 0;
 	}
+
+	public Goal getGoal() {
+		return goal;
+	}
+
+	public void setGoal(Goal goal) {
+		this.goal = goal;
+	}
+
+	public LocalDate getEntryDate() {
+		return entryDate;
+	}
+
+	public void setEntryDate(LocalDate entryDate) {
+		this.entryDate = entryDate;
+	}
+	
+	
+	
+	
 }

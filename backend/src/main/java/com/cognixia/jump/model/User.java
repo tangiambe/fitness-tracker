@@ -2,7 +2,7 @@ package com.cognixia.jump.model;
 
 import java.io.Serializable;
 import java.util.List;
-
+import java.util.TimeZone;
 
 import com.cognixia.jump.model.User.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
@@ -66,6 +67,9 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private Role role;
 	
+    @Column(nullable = false)
+    private String timeZone = "America/New_York"; // Default time zone
+    
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private TrackType trackType;
@@ -207,7 +211,18 @@ public class User implements Serializable {
 		this.goal = goal;
 	}
 
+	public String getTimeZone() {
+		return timeZone;
+	}
 
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
+	}
 	
-	
+    @PrePersist
+    public void setDefaultTimeZone() {
+        if (timeZone == null) {
+            timeZone = "America/New_York"; // Set the default time zone if not specified
+        }
+    }
 }

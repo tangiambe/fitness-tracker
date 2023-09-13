@@ -37,6 +37,10 @@ public class Goal implements Serializable{
 	@OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
 	private List<User> users;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
+	private List<Tracker> trackers;
+	
 	
 	private int calories;
 	private int steps;
