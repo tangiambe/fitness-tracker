@@ -198,7 +198,8 @@ p {
 }
 
 .info .form .fields .erorr {
-  border-color: #c94451;
+  border: 2px solid #c94451;
+
 }
 
 .info .form .fields label {
@@ -220,7 +221,7 @@ p {
   font-weight: 500;
 }
 
-.packs {
+/* .packs {
   margin-top: 40px;
 }
 
@@ -302,7 +303,7 @@ p {
 }
 
 .pack input[type=checkbox]:after {
-  /* content: url(../assets/images/icon-checkmark.svg); */
+  /* content: url(../assets/images/icon-checkmark.svg); 
   display: none;
 }
 
@@ -312,7 +313,7 @@ p {
 
 .pack input[type=checkbox]:checked::after {
   display: block;
-}
+} */
 
 .thanks {
   text-align: center;
@@ -667,4 +668,37 @@ p {
   .content {
     min-width: 50%;
   }
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 228px;
+  font-size: 18px;
+}
+
+.invalid {
+  color: #c94451;
+  margin-left: 10rem;
+  font-size: 20px;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  padding: 0.25rem;
+  bottom: -10px;
+}
+
+.instructions>svg {
+  margin-right: 0.25rem;
 }

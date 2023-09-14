@@ -5,11 +5,21 @@ import { useState, useEffect, useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const StepOne = () => {
+
   const dispatch = useDispatch();
   const user = useSelector(e => e.user.value);
-  
+
+  const refFname = useRef();
+  const refLname = useRef();
+  const refUsername = useRef();
+  const refEmail = useRef();
+  const refPwd = useRef();
+
   const [account, setAcc] = useState({
     fname: "",
     lname: "",
@@ -17,32 +27,66 @@ const StepOne = () => {
     email: "",
     password: ""
   });
-  
-  const emailval = e => {
-    const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+
+  /* Username */
+  // const [validUsername, setValidUsername] = useState(false);
+
+  /* Email */
+  const [emailFocus, setEmailFocus] = useState(false);
+
+  /* Password */
+  // const [validPwd, setValidPwd] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
+  /* Confirm Password */
+  const [validMatch, setValidMatch] = useState(false);
+  const [matchFocus, setMatchFocus] = useState(false);
+  const [confPasswordShown, setConfPasswordShown] = useState(false);
+  const toggleConfPasswordVisiblity = () => {
+    setConfPasswordShown(confPasswordShown ? false : true);
+  };
+
+  /* Regular Expressions for Input Validation */
+  const USERNAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+  const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+  const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+
+  const validUsername = e => {
+    return USERNAME_REGEX.test(e);
+  }
+
+
+  const validEmail = e => {
     return EMAIL_REGEX.test(e);
   };
 
-  const refFname = useRef();
-  const refLname = useRef();
-  const refUsername = useRef();
-  const refEmail = useRef();
-  const refPw = useRef();
-
-
-  useEffect(() => {
-    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, emailValid: emailval(refEmail.current.value) }));
-  }, [account.username, account.email]);
-
+  const validPwd = e => {
+    return PWD_REGEX.test(e);
+  }
 
 
 
   useEffect(() => {
+    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
+    //eslint-disable-next-line
+  }, [account.fname, account.lname, account.username, account.email, account.password]);
+
+
+
+
+  useEffect(() => {
+    refFname.current.value = user.fname;
+    refLname.current.value = user.lname;
     refUsername.current.value = user.username;
     refEmail.current.value = user.email;
+    refPwd.current.value = user.password;
 
-    dispatch(info({ ...user, username: refUsername.current.value, email: refEmail.current.value, emailValid: emailval(refEmail.current.value) }));
-
+    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
+    //eslint-disable-next-line
   }, [])
 
 
@@ -91,39 +135,58 @@ const StepOne = () => {
         <Row>
 
           <Col>
-            <div className="fields">
+            <Form.Group className="fields">
               <div className="dflex">
-                <label>Username</label>
+                <Form.Label>
+                  Username
+                  <FontAwesomeIcon icon={faCheck} className={validUsername(user.username) ? "valid" : "hide"} />
+                </Form.Label>
                 {user.nextClick && (
-                  <span>{user.username.length < 3 && "This field is required"}</span>
+                  <span>{user.username === "" ? "This field is required" :
+                    !validUsername(user.username) &&
+                    <FontAwesomeIcon icon={faTimes} className={"invalid"} />
+                  }</span>
                 )}
               </div>
-              <input
-                type="text" ref={refUsername} autoComplete="on"
+              <Form.Control
+                required
+                type="text"
+                ref={refUsername}
+                autoComplete="off"
                 placeholder="Enter a username"
-                className={user.username.length < 3 && user.nextClick ? "erorr" : ""}
+                aria-invalid={validUsername ? "false" : "true"}
+                aria-describedby="uidnote"
+                className={!validUsername(user.username) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, username: e.target.value })}
               />
-            </div>
+
+              <Form.Text id="uidnote" className={user.username && validUsername(user.username) ? "offscreen" : "instructions"}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                4 to 24 characters.<br />
+                Must begin with a letter.<br />
+                Letters, numbers, underscores, hyphens allowed.
+              </Form.Text>
+
+            </Form.Group>
           </Col>
 
           <Col>
             <div className="fields">
               <div className="dflex">
                 <label>Email Address</label>
-                {!user.emailValid && user.nextClick && (
+                {/* {!user.validEmail && user.nextClick && (
                   <span>
-                    {user.email == ""
+                    {user.email === ""
                       ? "This field is required"
                       : "Invalid Email Address"}
                   </span>
-                )}
+                )} */}
               </div>
               <input
                 type="text" ref={refEmail}
                 inputMode="email"
                 placeholder="Enter an email address"
-                className={!user.emailValid && user.nextClick ? "erorr" : ""}
+                // className={!user.validEmail && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, email: e.target.value })}
               />
             </div>
@@ -132,7 +195,7 @@ const StepOne = () => {
         </Row>
 
         <Row>
-          
+
           <Col>
             <div className="fields">
               <div className="dflex">
@@ -142,7 +205,7 @@ const StepOne = () => {
                 )}
               </div>
               <input
-                type="text" ref={refPw}
+                type="text" ref={refPwd}
                 // inputMode="email"
                 placeholder="Password"
                 // className={user.nextClick ? "erorr" : ""}
@@ -150,17 +213,17 @@ const StepOne = () => {
               />
             </div>
           </Col>
-         
+
           <Col>
             <div className="fields">
-            <div className="dflex">
+              <div className="dflex">
                 <label>Password</label>
                 {user.nextClick && (
                   <span>{user.password.length < 3 && "This field is required"}</span>
                 )}
               </div>
               <input
-                type="text" ref={refPw}
+                type="text" ref={refPwd}
                 // inputMode="email"
                 placeholder="Password"
                 // className={user.nextClick ? "erorr" : ""}
