@@ -54,6 +54,11 @@ const StepOne = () => {
   const USERNAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   const EMAIL_REGEX = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+  const NAME_REGEX = /^[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u01FF]+([ \-']{0,1}[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u01FF]+){0,2}[.]{0,1}$/
+
+  const validName = e => {
+    return NAME_REGEX.test(e);
+  }
 
   const validUsername = e => {
     return USERNAME_REGEX.test(e);
@@ -100,45 +105,57 @@ const StepOne = () => {
             <div className="fields">
               <div className="dflex">
                 <label>First Name</label>
+                <FontAwesomeIcon icon={faCheck} className={validName(user.fname) ? "valid" : "hide"} />
                 {user.nextClick && (
-                  <span>{user.fname.length < 0 && "This field is required"}</span>
+                  <span>{user.fname === "" ? "This field is required" :
+                    !validName(user.fname) &&
+                    <FontAwesomeIcon icon={faTimes} className={"invalid"} />
+                  }</span>
                 )}
               </div>
-              <input
-                type="text" ref={refFname} autoComplete="on"
-                placeholder="First Name"
-                className={user.fname.length < 0 && user.nextClick ? "erorr" : ""}
+              <Form.Control
+                required
+                type="text"
+                ref={refFname}
+                autoComplete="off"
+                placeholder="Enter First Name"
+                className={!validName(user.fname) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, fname: e.target.value })}
               />
             </div>
           </Col>
-
           <Col>
             <div className="fields">
               <div className="dflex">
                 <label>Last Name</label>
+                <FontAwesomeIcon icon={faCheck} className={validName(user.lname) ? "valid" : "hide"} />
                 {user.nextClick && (
-                  <span>{user.lname.length < 0 && "This field is required"}</span>
+                  <span>{user.lname === "" ? "This field is required" :
+                    !validName(user.lname) &&
+                    <FontAwesomeIcon icon={faTimes} className={"invalid"} />
+                  }</span>
                 )}
               </div>
-              <input
-                type="text" ref={refLname} autoComplete="on"
-                placeholder="Last Name"
-                className={user.lname.length < 0 && user.nextClick ? "erorr" : ""}
+              <Form.Control
+                required
+                type="text"
+                ref={refLname}
+                autoComplete="off"
+                placeholder="Enter Last Name"
+                className={!validName(user.lname) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, lname: e.target.value })}
               />
             </div>
           </Col>
-
         </Row>
 
         <Row>
 
           <Col>
-            <Form.Group className="fields">
+            <div className="fields">
               <div className="dflex">
-                <Form.Label>
-                  Username
+                <Form.Label className="user-label">
+                  Username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <FontAwesomeIcon icon={faCheck} className={validUsername(user.username) ? "valid" : "hide"} />
                 </Form.Label>
                 {user.nextClick && (
@@ -154,39 +171,40 @@ const StepOne = () => {
                 ref={refUsername}
                 autoComplete="off"
                 placeholder="Enter a username"
-                aria-invalid={validUsername ? "false" : "true"}
-                aria-describedby="uidnote"
                 className={!validUsername(user.username) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, username: e.target.value })}
               />
 
               <Form.Text id="uidnote" className={user.username && validUsername(user.username) ? "offscreen" : "instructions"}>
                 <FontAwesomeIcon icon={faInfoCircle} />
-                4 to 24 characters.<br />
-                Must begin with a letter.<br />
+                4 to 24 characters. Must begin with a letter.<br />
                 Letters, numbers, underscores, hyphens allowed.
               </Form.Text>
 
-            </Form.Group>
+            </div>
           </Col>
 
           <Col>
             <div className="fields">
               <div className="dflex">
-                <label>Email Address</label>
-                {/* {!user.validEmail && user.nextClick && (
-                  <span>
-                    {user.email === ""
-                      ? "This field is required"
-                      : "Invalid Email Address"}
-                  </span>
-                )} */}
+                <Form.Label>
+                  Email Address
+                <FontAwesomeIcon icon={faCheck} className={validEmail(user.email) ? "valid" : "hide"} />
+                </Form.Label>
+                {user.nextClick && (
+                  <span>{user.email === "" ? "This field is required" :
+                    !validEmail(user.email) &&
+                    <FontAwesomeIcon icon={faTimes} className={"invalid"} />
+                  }</span>
+                )}
               </div>
-              <input
-                type="text" ref={refEmail}
-                inputMode="email"
-                placeholder="Enter an email address"
-                // className={!user.validEmail && user.nextClick ? "erorr" : ""}
+              <Form.Control
+                required
+                type="email"
+                ref={refEmail}
+                autoComplete="off"
+                placeholder="Enter Email"
+                className={!validEmail(user.email) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, email: e.target.value })}
               />
             </div>

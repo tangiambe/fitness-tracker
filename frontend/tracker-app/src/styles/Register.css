@@ -127,14 +127,15 @@ main {
   border: none;
   color: white;
   border-radius: 10px;
-  margin-left: 105%;
+  /* margin-left: 105%; */
 }
 
-/* .btnRight {
+.btnRight {
   -webkit-box-pack: right !important;
       -ms-flex-pack: right !important;
           justify-content: right !important;
-} */
+          margin-left: 10%;
+}
 
 a {
   color: #FF914D;
@@ -204,8 +205,10 @@ p {
 }
 
 .info .form .fields label {
-  color: #FF914D
+  color: #FF914D;
+
 }
+
 
 .info .form .fields span {
   color: #c94451;
@@ -677,14 +680,14 @@ p {
 
 .valid {
   color: limegreen;
-  margin-left: 228px;
-  font-size: 18px;
+  margin-left: 200px;
+  font-size: 13px;
 }
 
 .invalid {
   color: #c94451;
   margin-left: 10rem;
-  font-size: 20px;
+  font-size: 13px;
 }
 
 .offscreen {
