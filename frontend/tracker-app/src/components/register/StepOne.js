@@ -20,22 +20,18 @@ const StepOne = () => {
   const refEmail = useRef();
   const refPwd = useRef();
 
+
   const [account, setAcc] = useState({
     fname: "",
     lname: "",
     username: "",
     email: "",
     password: ""
+
   });
 
-  /* Username */
-  // const [validUsername, setValidUsername] = useState(false);
 
-  /* Email */
-  const [emailFocus, setEmailFocus] = useState(false);
-
-  /* Password */
-  // const [validPwd, setValidPwd] = useState(false);
+  /* Password Focus */
   const [pwdFocus, setPwdFocus] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
@@ -43,8 +39,6 @@ const StepOne = () => {
   };
 
   /* Confirm Password */
-  const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
   const [confPasswordShown, setConfPasswordShown] = useState(false);
   const toggleConfPasswordVisiblity = () => {
     setConfPasswordShown(confPasswordShown ? false : true);
@@ -98,9 +92,8 @@ const StepOne = () => {
   return (
     <div className="info">
       <h2>Account Info</h2>
-      <Form className="form" autoComplete="on">
+      <Form className="form">
         <Row>
-
           <Col>
             <div className="fields">
               <div className="dflex">
@@ -209,46 +202,68 @@ const StepOne = () => {
               />
             </div>
           </Col>
-
         </Row>
 
         <Row>
-
           <Col>
             <div className="fields">
               <div className="dflex">
-                <label>Password</label>
+                <Form.Label htmlFor="password">
+                  Password
+                  <FontAwesomeIcon icon={faCheck} className={validPwd(user.password) ? "valid" : "hide"} />
+                </Form.Label>
                 {user.nextClick && (
-                  <span>{user.password.length < 3 && "This field is required"}</span>
+                  <span>{user.password === "" ? "This field is required" :
+                    !validPwd(user.password) &&
+                    <FontAwesomeIcon icon={faTimes} className={"invalid"} />
+                  }</span>
                 )}
               </div>
-              <input
-                type="text" ref={refPwd}
-                // inputMode="email"
-                placeholder="Password"
-                // className={user.nextClick ? "erorr" : ""}
+              <Form.Control
+                required
+                type="text"
+                ref={refPwd}
+                autoComplete="off"
+                placeholder="Enter a Password"
+                className={!validPwd(user.password) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, password: e.target.value })}
+                onFocus={() => setPwdFocus(true)}
+                onBlur={() => setPwdFocus(false)}
               />
+              <Form.Text id="pwdnote" className={pwdFocus && !validPwd(user.password) ? "instructions" : "offscreen"}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                8 to 24 characters.<br/>
+                Must include uppercase and lowercase letters,<br/>
+                a number and a special character.<br/>
+                Allowed special characters: ! @ # $ %
+              </Form.Text>
             </div>
           </Col>
 
-          <Col>
+           <Col>
+          {/*
             <div className="fields">
               <div className="dflex">
-                <label>Password</label>
+                <Form.Label>Confirm Password</Form.Label>
+                <FontAwesomeIcon icon={faCheck} className={(pwdMatch(e.target.value)) && user.confirmPw ? "valid" : "hide"} />
                 {user.nextClick && (
-                  <span>{user.password.length < 3 && "This field is required"}</span>
+                  <span>{user.confirmPw === "" ? "This field is required" :
+                    !(user.password === user.confirmPw) &&
+                    <FontAwesomeIcon icon={faTimes} className={"invalid"} />
+                  }</span>
                 )}
               </div>
-              <input
-                type="text" ref={refPwd}
-                // inputMode="email"
-                placeholder="Password"
-                // className={user.nextClick ? "erorr" : ""}
-                onChange={e => setAcc({ ...account, password: e.target.value })}
+              <Form.Control
+                required
+                type="text"
+                // ref={refLname}
+                autoComplete="off"
+                placeholder="Confirm Password"
+                className={!(user.password === user.confirmPw) && user.nextClick ? "erorr" : ""}
+                onChange={(e) => setConfirmPw(e.target.value)}
               />
-            </div>
-          </Col>
+            </div>*/}
+          </Col> 
         </Row>
       </Form>
     </div>

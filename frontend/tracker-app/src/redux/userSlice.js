@@ -9,6 +9,7 @@ export const userSlice = createSlice({
       username:"",
       email: "",
       password: "",
+      // confirmPw: "",
       nextPermation: false,
       nextClick: false,
       plan:"",
