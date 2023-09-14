@@ -1,14 +1,14 @@
 import Container from "react-bootstrap/esm/Container";
-import Steps from "../components/register/Steps";
-import StepOne from "../components/register/StepOne";
-import NavigationButton from "../components/register/NavButton";
-import Success from "../components/register/Success"
-import StepThree from "../components/register/StepThree"
-import StepFour from "./register/StepFour";
-import StepTwo from "../components/register/StepTwo"
+import Steps from "./Steps";
+import StepOne from "./StepOne";
+import NavigationButton from "./NavButton";
+import Success from "./Success"
+import StepThree from "./StepThree"
+import StepFour from "./StepFour";
+import StepTwo from "./StepTwo"
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import '../styles/Register.css'
+import '../../styles/Register.css'
 
 
 export const Register = () => {
