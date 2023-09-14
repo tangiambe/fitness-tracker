@@ -31,7 +31,7 @@ export const Home = () => {
                         </Container>
                         <Container className="text-center">
                             <Button href="/register" className="register-btn">Register</Button>
-                            <Button href="#" className="login-btn">Login</Button>
+                            <Button href="/login" className="login-btn">Login</Button>
                         </Container>
                     </Row>
 

@@ -29,7 +29,7 @@ export const NavBar = () => {
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className="nav-link px-3 py-2">
-                                        <Nav.Link href="#" className="fw-bold">
+                                        <Nav.Link href="/login" className="fw-bold">
                                             Login
                                         </Nav.Link>
                                     </Nav.Item>
