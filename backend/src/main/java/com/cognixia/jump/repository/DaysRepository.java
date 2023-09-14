@@ -12,8 +12,6 @@ import com.cognixia.jump.model.Days;
 @Repository
 public interface DaysRepository extends JpaRepository<Days, Integer>  {
 
-
-	@Query("SELECT d FROM Days d WHERE d.user.id = :id")
-	List<Days> getAllDaysByUserId(Integer id);
+	List<Days> findByTrackerId(Integer trackerId);
 
 }

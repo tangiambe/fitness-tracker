@@ -13,7 +13,9 @@ import com.cognixia.jump.model.Goal;
 import com.cognixia.jump.model.Nutrition;
 import com.cognixia.jump.model.Tracker;
 import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.User.ActiveType;
 import com.cognixia.jump.model.User.Role;
+import com.cognixia.jump.model.User.Sex;
 import com.cognixia.jump.model.User.TrackType;
 import com.cognixia.jump.repository.DaysRepository;
 import com.cognixia.jump.repository.GoalRepository;
@@ -51,19 +53,17 @@ public class ControllerService {
 	@Temporal(TemporalType.DATE) // For using java.util.Date
     public static LocalDate today = LocalDate.now(); 
 	
-    public Optional<Goal> findGoalByTrackType(TrackType trackType) {
-    	return goalRepo.findByTrackType(trackType);
-    }
 	
-	public User insertNewUser(String firstName, String lastName, String email,
-						String userName, String password, TrackType trackType) {
-		User insert = new User(firstName, lastName, email,userName,
-								password, trackType);
+	public User insertNewUser(String firstName, String lastName, String email, String userName, 
+							String password, Sex sex, int age, TrackType trackType,
+							int height, int weight, ActiveType activityType, String timeZone) {
+		User insert = new User(firstName, lastName, email, userName, password, sex, age,
+						trackType, height, weight, activityType, timeZone);
 		insert.setRole(Role.ROLE_USER);
-		Goal goal = goalRepo.findByTrackType(trackType).get();
+		Goal goal = new Goal(insert);
+		goalRepo.save(goal);
 		insert.setGoal(goal);
-		insert.setDays(null);
-		Tracker tracker = new Tracker(0, 0, goal, null, null);
+		Tracker tracker = new Tracker(insert);
 	//	tracker = trackerRepo.save(tracker);
 		tracker.setUser(insert);
 
@@ -71,16 +71,15 @@ public class ControllerService {
 		insert.setTracker(tracker);
 		insert = userRepo.save(insert);
 		
-		insertNewDay(insert, tracker);
-		insert.setDays(daysRepo.getAllDaysByUserId(insert.getId()));
-		System.out.println(insert.getDays().toString());
+		insertNewDay(tracker);
+		tracker.setDays(daysRepo.findByTrackerId(tracker.getId()));
 		return userRepo.save(insert);		
 	}
-	public void insertNewDay(User user, Tracker tracker) {
+	public void insertNewDay(Tracker tracker) {
 		
 		trackerService.updateTrackerEntryDate(tracker.getId(), today);
 		
-		Days day = new Days(user, tracker, LocalDate.now());
+		Days day = new Days(tracker);
 		day = daysRepo.save(day);
 	}
 	
@@ -89,9 +88,9 @@ public class ControllerService {
 		return userRepo.getByUserId(userId);
 		
 	}
-	public List<Days> getAllDaysByUserId(Integer id){
+	public List<Days> findByTrackerId(Integer id){
 		
-		return daysRepo.getAllDaysByUserId(id);
+		return daysRepo.findByTrackerId(id);
 	}
 	
 	public Tracker addFood(Tracker tracker, Nutrition nutrition) {
@@ -108,7 +107,7 @@ public class ControllerService {
 			nutrition.setTotalServingSize(nutrition.getServing_size_g());
 			nutrition.setQuantity(quantity);
 			nutritionList.add(nutrition);
-			tracker.setTotalCalories(tracker.getTotalCalories() + 
+			tracker.setTotalCaloriesConsumed(tracker.getTotalCaloriesConsumed() + 
 					nutrition.getFoodCalories());
 			tracker.setNutritions(nutritionList);
 			tracker = trackerRepo.save(tracker);

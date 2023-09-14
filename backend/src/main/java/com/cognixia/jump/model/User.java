@@ -2,12 +2,6 @@ package com.cognixia.jump.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.TimeZone;
-
-import com.cognixia.jump.model.User.Role;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,8 +15,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 
 
 @Entity
@@ -36,6 +32,18 @@ public class User implements Serializable {
 	public static enum Role {
 		ROLE_USER, ROLE_ADMIN	
 	}
+	public static enum Sex {
+		MALE, FEMALE	
+	}
+	
+	public static enum ActiveType {
+		NONE, //little or no exercise
+		LIGHT, //light exercise or sports 1-3 days a week
+		MODERATE,// moderate exercise or sports 3-5 days a week
+		VERY, //hard exercise or sports 6-7 days a week
+		SUPER	//very hard exercise, physical job, or training twice a day
+	}
+	
 	/**
 	 * 
 	 */
@@ -51,32 +59,44 @@ public class User implements Serializable {
 	@NotBlank(message = "Last name cannot be left blank")
 	private String lastName;
 	
-	@Pattern(regexp = "^.+@.+$", message="Not formatted like an email") // checking there's an @ in the email
-	@Column( unique = true, nullable = false )  
-	private String email;
-	
 	@Column(unique = true, nullable = false)
-	@NotBlank
+	@NotBlank(message = "Username cannot be left blank")
 	private String userName;
 	
 	@Column(nullable = false)
-	@NotBlank
+	@NotBlank(message = "Password cannot be left blank")
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)	
+	private Sex sex;
+	
+	@Min(value =13, message = "Minimum Age is 13")
+	@Column(nullable = false)	
+	private int age;
+	
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private Role role;
+	private TrackType trackType;	
+	
+	@Positive(message = "Please enter Positive Height")
+	private int height;
+	
+	@Positive(message = "Please enter Positive Weight")
+	private int weight;
+	
+
+	//Ativity Level to calculate tdee
+	@Enumerated(EnumType.STRING)
+	private ActiveType activityType = ActiveType.NONE;
+	
 	
     @Column(nullable = false)
     private String timeZone = "America/New_York"; // Default time zone
-    
+	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private TrackType trackType;
-	
-	//@JsonProperty(access = Access.WRITE_ONLY)
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Days> days;
+	private Role role = Role.ROLE_USER;
 	
     @ManyToOne
     @JoinColumn(name = "goal_id", referencedColumnName = "id")
@@ -85,41 +105,39 @@ public class User implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "tracker_id", unique = true)
 	private Tracker tracker;
+	
+	@Pattern(regexp = "^.+@.+$", message="Not formatted like an email") // checking there's an @ in the email
+	@Column( unique = true, nullable = false )  
+	private String email;
 		
 	public User() {}
 
-	public User(Integer id, @NotBlank(message = "First name cannot be left blank") String firstName,
-			@NotBlank(message = "Last name cannot be left blank") String lastName,
-			@Pattern(regexp = "^.+@.+$", message = "Not formatted like an email") String email,
-			@NotBlank String userName, @NotBlank String password, Role role, TrackType trackType, List<Days> days,
-			Tracker tracker) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.userName = userName;
-		this.password = password;
-		this.role = role;
-		this.trackType = trackType;
-		this.days = days;
-		this.tracker = tracker;
-	}
-	
-	
 
 	public User(@NotBlank(message = "First name cannot be left blank") String firstName,
 			@NotBlank(message = "Last name cannot be left blank") String lastName,
 			@Pattern(regexp = "^.+@.+$", message = "Not formatted like an email") String email,
-			@NotBlank String userName, @NotBlank String password, TrackType trackType) {
+			@NotBlank(message = "Username cannot be left blank") String userName,
+			@NotBlank(message = "Password cannot be left blank") String password,
+			@NotBlank(message = "Sex cannot be left blank") Sex sex,
+			@Min(value = 13, message = "Minimum Age is 13") int age,
+			@NotBlank(message = "Please choose Weight Loss, Weight Gain, or Weight Maintain") TrackType trackType,
+			@Positive(message = "Please enter Positive Height") int height,
+			@Positive(message = "Please enter Positive Weight") int weight, ActiveType activityType, String timeZone) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
 		this.userName = userName;
 		this.password = password;
+		this.sex = sex;
+		this.age = age;
 		this.trackType = trackType;
+		this.height = height;
+		this.weight = weight;
+		this.activityType = activityType;
+		this.timeZone = timeZone;
+		this.email = email;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -186,18 +204,9 @@ public class User implements Serializable {
 	}
 
 
-
-	public List<Days> getDays() {
-		return days;
+	public Tracker getTracker() {
+		return tracker;
 	}
-
-	public void setDays(List<Days> days) {
-		this.days = days;
-	}
-
-//	public Tracker getTracker() {
-//		return tracker;
-//	}
 
 	public void setTracker(Tracker tracker) {
 		this.tracker = tracker;
@@ -225,4 +234,48 @@ public class User implements Serializable {
             timeZone = "America/New_York"; // Set the default time zone if not specified
         }
     }
+
+	public Sex getSex() {
+		return sex;
+	}
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+
+	public ActiveType getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(ActiveType activityType) {
+		this.activityType = activityType;
+	}
+
+	
+
 }
