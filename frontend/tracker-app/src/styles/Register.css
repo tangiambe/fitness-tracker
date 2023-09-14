@@ -127,13 +127,14 @@ main {
   border: none;
   color: white;
   border-radius: 10px;
+  margin-left: 105%;
 }
 
-.btnRight {
+/* .btnRight {
   -webkit-box-pack: right !important;
       -ms-flex-pack: right !important;
           justify-content: right !important;
-}
+} */
 
 a {
   color: #FF914D;
