@@ -51,7 +51,9 @@ public class ControllerService {
 	TrackerService trackerService;
 	
 	@Temporal(TemporalType.DATE) // For using java.util.Date
-    public static LocalDate today = LocalDate.now(); 
+    public static LocalDate today = LocalDate.now();
+	public static LocalDate yesterday = LocalDate.now().minusDays(1);
+	
 	
 	
 	public User insertNewUser(String firstName, String lastName, String email, String userName, 
@@ -70,17 +72,13 @@ public class ControllerService {
 		tracker = trackerRepo.save(tracker);		
 		insert.setTracker(tracker);
 		insert = userRepo.save(insert);
-		
 		insertNewDay(tracker);
 		tracker.setDays(daysRepo.findByTrackerId(tracker.getId()));
 		return userRepo.save(insert);		
 	}
 	public void insertNewDay(Tracker tracker) {
-		
-		trackerService.updateTrackerEntryDate(tracker.getId(), today);
-		
-		Days day = new Days(tracker);
-		day = daysRepo.save(day);
+		tracker.newDay(tracker);
+		trackerRepo.save(tracker);
 	}
 	
 	public Optional<User> getByUserId(Integer userId) {
@@ -94,7 +92,7 @@ public class ControllerService {
 	}
 	
 	public Tracker addFood(Tracker tracker, Nutrition nutrition) {
-		
+
 		Integer quantity = 1;
 		List<Nutrition> nutritionList= tracker.getNutritions();
 				
