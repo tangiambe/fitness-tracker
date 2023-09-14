@@ -2,10 +2,9 @@ package com.cognixia.jump.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
-import com.cognixia.jump.model.User.Sex;
-import com.cognixia.jump.model.User.TrackType;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -13,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
@@ -28,17 +26,12 @@ public class Tracker implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	
-    @Temporal(TemporalType.DATE) // For using java.util.Date
-    private LocalDate entryDate; // Date associated with the entry	
-		
 
-	
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id",  unique = true)
 	private User user;
@@ -47,7 +40,7 @@ public class Tracker implements Serializable {
 	private List<Nutrition> nutrition ;
 		
 	@OneToMany(mappedBy = "tracker", cascade = CascadeType.ALL)
-	private List<Days> Days ;
+	private List<Days> days ;
 	 
 	private double totalDailySteps; 
 	private double totalCaloriesConsumed;
@@ -59,11 +52,17 @@ public class Tracker implements Serializable {
 
 	public Tracker(User user) {
 		this.user = user;
-		setEntryDate(LocalDate.now());
 	}
-
-
-
+	
+	public void newDay(Tracker tracker) {
+		if (nutrition != null)  {nutrition.clear();}
+		totalDailySteps = 0;
+		totalCaloriesConsumed = 0;
+		enqueueDays(new Days(tracker));
+		if (days.size() > 14) {
+			dequeueDays();
+		}
+	}
 
 	public Integer getId() {
 		return id;
@@ -72,15 +71,6 @@ public class Tracker implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public LocalDate getEntryDate() {
-		return entryDate;
-	}
-
-	public void setEntryDate(LocalDate entryDate) {
-		this.entryDate = entryDate;
-	}
-	
 		
 	
 
@@ -102,12 +92,27 @@ public class Tracker implements Serializable {
 	}
 
 	public void setDays(List<Days> days) {
-		Days = days;
+		this.days = days;
 	}
 
 //	public List<Days> getDays() {
 //		return Days;
 //	}
+    // Method to enqueue a Days object
+    public void enqueueDays(Days day) {
+        if (days == null) {
+            days = new LinkedList<>(); // Initialize the list if it's null
+        }
+        days.add(day);
+    }
+    
+    // Method to dequeue the first Days object
+    public Days dequeueDays() {
+        if (days != null && !days.isEmpty()) {
+            return days.remove(0);
+        }
+        return null; // Return null if the queue is empty
+    }
 
 
 

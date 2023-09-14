@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.cognixia.jump.model.Nutrition;
 import com.cognixia.jump.model.Tracker;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.TrackerRepository;
+import com.cognixia.jump.repository.UserRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -75,11 +77,20 @@ public class TrackerService {
             // Create a new Tracker object for the user and enqueue it
             Tracker tracker = new Tracker();
             tracker.setUser(user);
-            tracker.setEntryDate(LocalDate.now()); // Set the current date or the date you want
             // Other tracker properties initialization
             
             // Save the tracker object in the database
             trackerRepo.save(tracker);
         }
         
+        
+
+        @Scheduled(cron = "0 0 * * *") // This cron expression triggers the method every day at midnight
+        public void newDayForAllUsers() {
+            List<Tracker> trackers = trackerRepo.findAll(); // Fetch all users from the repository
+
+            for (Tracker tracker : trackers) {
+                tracker.newDay(tracker);// Call the newDay method for each user's tracker
+            }
+        }
  }

@@ -2,9 +2,12 @@ package com.cognixia.jump.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.cognixia.jump.model.User.Sex;
+import com.cognixia.jump.model.User.ActiveType;
 import com.cognixia.jump.model.User.TrackType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -68,7 +71,7 @@ public class Goal implements Serializable{
 		setTdee(user);
 		setCaloricDeficit(user);
 		setDailyCaloricGoal(tdee, caloricDeficit);
-		setDailyStepsGoal(dailyCaloricGoal);
+		setDailyStepsGoal(user);
 	}
 
 	public static long getSerialversionuid() {
@@ -139,6 +142,7 @@ public double getTdee() {
         default:
             throw new IllegalArgumentException("Invalid ActiveType");
         }	
+        
     }
 
 	
@@ -167,13 +171,29 @@ public double getTdee() {
 		return dailyStepsGoal;
 	}
 
-	public void setDailyStepsGoal(double dailyCaloricGoal ) {
-		double goal = dailyCaloricGoal/caloriesBurnedPerStep;
-		if (goal > 20000) { 
-			this.dailyStepsGoal = 20000.0; }
-		else {
-			this.dailyStepsGoal = goal;}
-	}	
+	public void setDailyStepsGoal(User user ) {
+		switch (user.getActivityType()) {
+        case NONE:
+            dailyStepsGoal = 12500 + caloricDeficit; // little or no exercise
+            break;
+        case LIGHT:
+            dailyStepsGoal = 10000 + caloricDeficit; // light exercise or sports 1-3 days a week
+            break;
+        case MODERATE:
+            dailyStepsGoal = 7500 + caloricDeficit; // moderate exercise or sports 3-5 days a week
+            break;
+        case VERY:
+            dailyStepsGoal = 5000 + caloricDeficit; // hard exercise or sports 6-7 days a week
+            break;
+        case SUPER:
+            dailyStepsGoal = 2500 + caloricDeficit; // very hard exercise, physical job, or training twice a day
+            break;
+        default:
+            throw new IllegalArgumentException("Invalid ActiveType");
+        }	
+    }
+
+	
 	
 	
 
