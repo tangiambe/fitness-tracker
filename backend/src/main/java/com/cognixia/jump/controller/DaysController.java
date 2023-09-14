@@ -26,9 +26,9 @@ public class DaysController {
 
 //	http://localhost:8080/api/days/1
 	@GetMapping("/days/{id}")
-	public ResponseEntity<?> getAllDaysByUserId(@PathVariable Integer id) {
+	public ResponseEntity<?> getAllDaysByTrackerId(@PathVariable Integer id) {
 		
-		List<Days> days = service.getAllDaysByUserId(id);
+		List<Days> days = service.findByTrackerId(id);
 		
 		if(days.isEmpty()) {
 			return ResponseEntity.status(404).body("User not found");

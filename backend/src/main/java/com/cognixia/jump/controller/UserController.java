@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.User.ActiveType;
+import com.cognixia.jump.model.User.Sex;
+import com.cognixia.jump.model.User.TrackType;
 import com.cognixia.jump.repository.UserRepository;
 import com.cognixia.jump.service.ControllerService;
 
@@ -48,9 +51,10 @@ public class UserController {
 	@PostMapping("/user")
 	public ResponseEntity<?> createUser( @RequestBody User user ) {
 		
-		User save = service.insertNewUser(user.getFirstName(), user.getLastName(), 
-				user.getEmail(), user.getUserName(),user.getPassword(), 
-				user.getTrackType());
+		User save = service.insertNewUser(user.getFirstName(), user.getLastName(), user.getEmail(),
+				 user.getUserName(),user.getPassword(), user.getSex(), user.getAge(), user.getTrackType(),
+				user.getHeight(), user.getWeight(), user.getActivityType(), user.getTimeZone());
+		
 		User created = repo.save(save);
 		return ResponseEntity.status(201).body(created);
 	}

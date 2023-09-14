@@ -40,7 +40,7 @@ public class TrackerService {
         
         public void updateTrackerTotalCalories(int trackerId, double newTotalCalories) {
             entityManager.createQuery(
-                "UPDATE Tracker t SET t.totalCalories = :newTotalCalories " +
+                "UPDATE Tracker t SET t.totalCaloriesConsumed = :newTotalCalories " +
                 "WHERE t.id = :trackerId")
                 .setParameter("newTotalCalories", newTotalCalories)
                 .setParameter("trackerId", trackerId)
