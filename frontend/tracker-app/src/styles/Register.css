@@ -24,7 +24,7 @@ main {
 
 .Container {
   min-width: 940px;
-  height: 600px;
+  height: 650px;
   background-color: #27374352;
   margin: auto;
   padding: 16px 15px 15px 15px;
@@ -159,6 +159,8 @@ p {
   color: #FF914D;
 }
 
+
+
 .info .form {
   margin-top: 30px;
 }
@@ -213,6 +215,7 @@ p {
 .info .form .fields span {
   color: #c94451;
 }
+
 
 .dflex {
   display: -webkit-box;
@@ -706,3 +709,13 @@ p {
 .instructions>svg {
   margin-right: 0.25rem;
 }
+
+i {
+  color: white;
+  margin-left: 10px;
+  font-size: 15px;
+  position: absolute;
+}
+
+
+
