@@ -5,8 +5,11 @@ import { useState, useEffect, useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import InputGroup from 'react-bootstrap/InputGroup'
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 
 const StepOne = () => {
@@ -31,18 +34,22 @@ const StepOne = () => {
   });
 
 
-  /* Password Focus */
+  /* Password */
   const [pwdFocus, setPwdFocus] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
+  /* Password Visiblity Icons*/
+  const showPwd = <FontAwesomeIcon icon={faEye} />;
+  const hidePwd = <FontAwesomeIcon icon={faEyeSlash} />;
+
   /* Confirm Password */
-  const [confPasswordShown, setConfPasswordShown] = useState(false);
-  const toggleConfPasswordVisiblity = () => {
-    setConfPasswordShown(confPasswordShown ? false : true);
-  };
+  // const [confPasswordShown, setConfPasswordShown] = useState(false);
+  // const toggleConfPasswordVisiblity = () => {
+  //   setConfPasswordShown(confPasswordShown ? false : true);
+  // };
 
   /* Regular Expressions for Input Validation */
   const USERNAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -182,7 +189,7 @@ const StepOne = () => {
               <div className="dflex">
                 <Form.Label>
                   Email Address
-                <FontAwesomeIcon icon={faCheck} className={validEmail(user.email) ? "valid" : "hide"} />
+                  <FontAwesomeIcon icon={faCheck} className={validEmail(user.email) ? "valid" : "hide"} />
                 </Form.Label>
                 {user.nextClick && (
                   <span>{user.email === "" ? "This field is required" :
@@ -210,6 +217,7 @@ const StepOne = () => {
               <div className="dflex">
                 <Form.Label htmlFor="password">
                   Password
+                  <i onClick={togglePasswordVisiblity}>{passwordShown ? hidePwd : showPwd}</i>
                   <FontAwesomeIcon icon={faCheck} className={validPwd(user.password) ? "valid" : "hide"} />
                 </Form.Label>
                 {user.nextClick && (
@@ -221,7 +229,7 @@ const StepOne = () => {
               </div>
               <Form.Control
                 required
-                type="text"
+                type={passwordShown ? "text" : "password"}
                 ref={refPwd}
                 autoComplete="off"
                 placeholder="Enter a Password"
@@ -230,18 +238,21 @@ const StepOne = () => {
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}
               />
+
+
               <Form.Text id="pwdnote" className={pwdFocus && !validPwd(user.password) ? "instructions" : "offscreen"}>
                 <FontAwesomeIcon icon={faInfoCircle} />
-                8 to 24 characters.<br/>
-                Must include uppercase and lowercase letters,<br/>
-                a number and a special character.<br/>
+                8 to 24 characters.<br />
+                Must include uppercase and lowercase letters,<br />
+                a number and a special character.<br />
                 Allowed special characters: ! @ # $ %
               </Form.Text>
             </div>
           </Col>
 
-           <Col>
-          {/*
+
+          <Col>
+            {/*
             <div className="fields">
               <div className="dflex">
                 <Form.Label>Confirm Password</Form.Label>
@@ -263,7 +274,7 @@ const StepOne = () => {
                 onChange={(e) => setConfirmPw(e.target.value)}
               />
             </div>*/}
-          </Col> 
+          </Col>
         </Row>
       </Form>
     </div>
