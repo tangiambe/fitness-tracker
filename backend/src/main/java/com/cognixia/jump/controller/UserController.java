@@ -34,7 +34,7 @@ public class UserController {
 		return repo.findAll();
 	}
 	
-	
+	//http://localhost:8080/api/user/{{userId}}
 	@GetMapping("/user/{id}")
 	public ResponseEntity<?> getUserById(@PathVariable Integer id) {
 		

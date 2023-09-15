@@ -2,6 +2,9 @@ package com.cognixia.jump.model;
 
 import java.io.Serializable;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -102,10 +105,10 @@ public class User implements Serializable {
     @JoinColumn(name = "goal_id", referencedColumnName = "id")
     private Goal goal;
     
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "tracker_id", unique = true)
-	private Tracker tracker;
-	
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore // Add this annotation to prevent infinite recursion
+    private Tracker tracker;
+    
 	@Pattern(regexp = "^.+@.+$", message="Not formatted like an email") // checking there's an @ in the email
 	@Column( unique = true, nullable = false )  
 	private String email;
