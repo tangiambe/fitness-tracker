@@ -2,7 +2,10 @@ package com.cognixia.jump.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,8 +43,9 @@ public class Nutrition implements Serializable {
 	private float totalCalories;
 	
     @ManyToOne
-    @JoinColumn(name = "goal_id", referencedColumnName = "id")
-    private Tracker tracker;
+    @JoinColumn(name = "day_id")
+    @JsonBackReference // Use this annotation to prevent serialization loop
+    private Days day;
 	
 	public Nutrition() {}
 	
@@ -218,18 +222,6 @@ public class Nutrition implements Serializable {
 		this.sugar_g = sugar_g;
 	}
 
-
-
-//	public Tracker getTracker() {
-//		return tracker;
-//	}
-
-	public void setTracker(Tracker tracker) {
-		this.tracker = tracker;
-	}
-	
-	
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -259,7 +251,14 @@ public class Nutrition implements Serializable {
 		this.totalServingSize = 0;
 		this.totalCalories = 0;
 	}
-	
+
+	public Days getDay() {
+		return day;
+	}
+
+	public void setDay(Days day) {
+		this.day = day;
+	}
 
 	@Override
 	public String toString() {
@@ -267,8 +266,11 @@ public class Nutrition implements Serializable {
 				+ serving_size_g + ", fat_total_g=" + fat_total_g + ", fat_saturated_g=" + fat_saturated_g
 				+ ", protein_g=" + protein_g + ", sodium_mg=" + sodium_mg + ", potassium_mg=" + potassium_mg
 				+ ", cholesterol_mg=" + cholesterol_mg + ", carbohydrates_total_g=" + carbohydrates_total_g
-				+ ", fiber_g=" + fiber_g + ", sugar_g=" + sugar_g + ", tracker=" + tracker + "]";
+				+ ", fiber_g=" + fiber_g + ", sugar_g=" + sugar_g + ", quantity=" + quantity + ", totalServingSize="
+				+ totalServingSize + ", totalCalories=" + totalCalories + ", day=" + day + "]";
 	}
+	
+
 
 
 }
