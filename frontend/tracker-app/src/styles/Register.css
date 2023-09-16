@@ -47,7 +47,7 @@ main {
 .Steps {
   /* background: url("/src/assets/images/bg-sidebar-desktop.svg") no-repeat;
   background-size: contain; */
-  /* background-image: linear-gradient(to top, #243949 0%, #517FA4 100%); */
+  background-image: linear-gradient(to top, #243949 0%, #517FA4 100%);
   margin-top: 30px;
   margin-left: 30px;
   border: 1px solid #FF914D;
@@ -73,23 +73,27 @@ main {
   margin-bottom: 8px;
   margin-top: 10px;
   background-color: #2B58763b;
-  color: white;
+  color: #02295a;
   border-radius: 100%;
   font-weight: 500;
   border: 1px solid #FF914D;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .Step .active {
-  background-color: #bfe2fd;
-  color: #02295a;
-  border: 1px solid #FF914D;
+  background-color: #6fa6cf;
+  color: #fff;
+  border: 2px solid #FF914D;
+  transform: scale(1.2);
+  font-weight: 700;
 }
+
 
 .Step .stepInfo span {
   color: #FF914D;
   font-size: 14px;
 }
+
 
 .Step .stepInfo p {
   font-weight: 500;
@@ -117,6 +121,19 @@ main {
 }
 
 .navigation .btn1 {
+  padding: 15px 0px;
+  margin: 0px 180px 0px 0px !important;
+  font-weight: 700;
+  font-size: 16px;
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   background-color: transparent;
   border: none;
   color: #FF914D;
@@ -403,68 +420,10 @@ p {
   font-size: 20px;
 }
 
+/* PLAN */
+
 .Plan {
   width: 100%;
-}
-
-.Plan .switch {
-  width: 100%;
-  background-color: #eef5ff;
-  border-radius: 10px;
-  padding: 15px 0;
-  text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.Plan .switch input {
-  margin: 0px 20px;
-}
-
-.Plan .switch input[type=checkbox] {
-  cursor: pointer;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  width: 45px;
-  height: 25px;
-  border-radius: 30px;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #02295a;
-  padding: 5px;
-}
-
-.Plan .switch input[type=checkbox]:after {
-  content: "";
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: white;
-}
-
-.Plan .switch input[type=checkbox]:checked {
-  background-color: #02295a;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
-}
-
-.Plan .switch input[type=checkbox]:checked::after {
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
 }
 
 .Plan span {
@@ -472,43 +431,44 @@ p {
   color: #9699ab;
 }
 
-.Plan .switOn {
-  color: #174a89;
-}
 
 .plansCrads {
   display: -ms-grid;
   display: grid;
   /* ms-grid-columns: (1fr)[3]; */
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 40px;
+  grid-template-columns: repeat(1, 5fr);
+  gap: 10px;
+  margin-top: 10px;
   margin-bottom: 30px;
+  margin-right: 70px;
 }
 
 .planClick {
-  border: #473dff 1px solid !important;
-  background-color: #F8F9FE;
+  border: #FF914D 2px solid !important;
+  transform: scale(1.05);
 }
 
 .planCard {
-  padding: 20px 15px;
+  padding: 0px 15px;
   border: #d6d9e6 1px solid;
   border-radius: 10px;
   cursor: pointer;
+  background-image: linear-gradient(#243949 -50%, #517FA4 90%);
+  transition: transform .2s;
 }
 
 .planCard:hover {
-  border: #473dff 1px solid !important;
+  border: #FF914D 2px solid !important;
+  transform: scale(1.03);
 }
 
 .planCard .title {
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 .planCard .title h3 {
   font-size: 18px;
-  color: #174a89;
+  color: #fff;
 }
 
 .planCard .title p {
