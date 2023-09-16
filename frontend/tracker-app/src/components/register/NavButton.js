@@ -22,7 +22,7 @@ const NavButton = () => {
     
   }
   return (
-    <div className={page===0?'navigation btnRight':'navigation'}>
+    <div className='navigation btnRight'>
       {page!==0 &&<button className='btn1' onClick={()=>dispatch(back())}>Go Back</button>}
       <button className='btn2'onClick={nextClick}>{page===3?"Create Account":"Next"}</button>
     </div>
