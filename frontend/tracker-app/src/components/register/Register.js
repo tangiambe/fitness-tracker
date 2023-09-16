@@ -6,7 +6,7 @@ import Success from "./Success"
 import StepThree from "./StepThree"
 import StepFour from "./StepFour";
 import StepTwo from "./StepTwo"
-import { useState } from "react";
+// import { useState } from "react";
 import { useSelector } from "react-redux";
 import '../../styles/Register.css'
 
@@ -19,7 +19,7 @@ export const Register = () => {
             case 0:
                 return <StepOne />
             case 1:
-                return <StepTwo />
+                return <StepThree />
             case 2:
                 return <StepThree />
             case 3:
@@ -44,7 +44,7 @@ export const Register = () => {
                     <div className="content">
                         {PageDisplay()}
 
-                        {page != 4 && <NavigationButton />}
+                        {page !== 4 && <NavigationButton />}
                     </div>
                 </Container>
             </Container>
