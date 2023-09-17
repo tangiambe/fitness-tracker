@@ -10,10 +10,15 @@ export const userSlice = createSlice({
       username:"",
       email: "",
       password: "",
+      sex: "",
+      age: "",
+      height: "",
+      weight: "",
+      timezone: "",
       level:"",
       goal:"",
-      nextPermation: false,
-      nextClick: false,
+      // nextPermutation: false,
+      nextClick: false
     },
   },
   reducers: {
@@ -21,7 +26,7 @@ export const userSlice = createSlice({
       state.value = action.payload;
     },
     login: (state, action) => {
-      const {_id, firstName, lastName, username, email, password} = action.payload;
+      const {_id, firstName, lastName, username, email, password, sex, height, weight, timezone, level, goal} = action.payload;
       // console.log(`Action.payload: ${JSON.stringify(action.payload)}`)
       state._id = _id;
       state.firstName = firstName;
@@ -29,6 +34,12 @@ export const userSlice = createSlice({
       state.username = username;
       state.email = email;
       state.password = password;
+      state.sex = sex;
+      state.height = height;
+      state.weight = weight;
+      state.timezone = timezone;
+      state.level = level;
+      state.goal = goal;
   },
   logout: (state) => {
       state._id = "-1";
@@ -37,8 +48,14 @@ export const userSlice = createSlice({
       state.username = "";
       state.email = "";
       state.password = "";
+      state.sex = "";
+      state.height = "";
+      state.weight = "";
+      state.timezone = "";
+      state.level = "";
+      state.goal = "";
+      state.nextClick = false;
   }
-    // login/logout reducers
   },
 });
 export const { info, login, logout } = userSlice.actions;

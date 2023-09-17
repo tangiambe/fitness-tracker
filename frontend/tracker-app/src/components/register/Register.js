@@ -19,7 +19,7 @@ export const Register = () => {
             case 0:
                 return <StepOne />
             case 1:
-                return <StepThree />
+                return <StepTwo />
             case 2:
                 return <StepThree />
             case 3:
