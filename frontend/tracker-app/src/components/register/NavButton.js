@@ -53,6 +53,7 @@ const NavButton = () => {
       </button>
     </div>
   );
+}
 };
 
-export default NavButton;
+export default NavButton
