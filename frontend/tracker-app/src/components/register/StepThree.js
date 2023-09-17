@@ -26,7 +26,7 @@ const StepThree = () => {
     light: false,
     moderate: false,
     very: false,
-    super: false
+    super: false,
   });
 
   useEffect(()=>{
@@ -45,7 +45,10 @@ const StepThree = () => {
         break;
       case "super":
         setLevel({none: false, light: false, moderate: false, very: false, super: true});
-        break;      
+        break;
+      // default:
+      //   setLevel({none: false, light: false, moderate: false, very: false, super: false});
+      //   break;  
     }
     //eslint-disable-next-line
   },[])

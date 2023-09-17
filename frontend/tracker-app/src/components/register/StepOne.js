@@ -74,16 +74,6 @@ const StepOne = () => {
     return PWD_REGEX.test(e);
   }
 
-
-
-  useEffect(() => {
-    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
-    //eslint-disable-next-line
-  }, [account.fname, account.lname, account.username, account.email, account.password]);
-
-
-
-
   useEffect(() => {
     refFname.current.value = user.fname;
     refLname.current.value = user.lname;
@@ -94,6 +84,14 @@ const StepOne = () => {
     dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
     //eslint-disable-next-line
   }, [])
+
+
+  useEffect(() => {
+    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
+    //eslint-disable-next-line
+  }, [account.fname, account.lname, account.username, account.email, account.password]);
+
+
 
 
   return (
@@ -154,7 +152,7 @@ const StepOne = () => {
           <Col>
             <div className="fields">
               <div className="dflex">
-                <Form.Label className="user-label">
+                <Form.Label>
                   Username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <FontAwesomeIcon icon={faCheck} className={validUsername(user.username) ? "valid" : "hide"} />
                 </Form.Label>

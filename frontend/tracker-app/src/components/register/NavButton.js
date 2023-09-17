@@ -12,13 +12,17 @@ const NavButton = () => {
   const nextClick=()=>{
     console.log(user)
     dispatch(info({...user,nextClick:true}));
-    if(/*user.validEmail &&*/ user.username.length > 3 && page===0){
+    if(user.username.length > 3 && page===0){
+      dispatch(next());
+      dispatch(info({...user,nextClick:false}))
+    } 
+    if (user.sex.length > 3 && page===1){
       dispatch(next());
       dispatch(info({...user,nextClick:false}))
     }
-    if(page!==0){
-      dispatch(next());
-    }
+    // if(page!==0){
+    //   dispatch(next());
+    // }
     
   }
   return (
