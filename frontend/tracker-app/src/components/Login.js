@@ -9,12 +9,13 @@ import '../styles/Login.css'
 import { login } from "../redux/userSlice";
 import { Alert } from "react-bootstrap";
 import InputGroup from 'react-bootstrap/InputGroup'
+import UserApi from "../api/UserApi";
 
 
 export const Login = () => {
 
     const [user, setUser] = useState({
-        _id: "-1",
+        id: "-1",
         firstName: "",
         lastName: "",
         username: "",
@@ -26,13 +27,28 @@ export const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // UserApi.getUserByCredentials(event.target.username.value, event.target.password.value, setUser, setAuth);
-    }
+
+        const result = await UserApi.getUserByCredentials(
+            event.target.username.value,
+            event.target.password.value
+        );
+
+        if (result) {
+            // Authentication succeeded
+            setUser(result);
+            setAuth({ show: true, auth: true });
+        } else {
+            // Authentication failed
+            setAuth({ show: true, auth: false });
+        }
+    };
 
     useEffect(() => {
-        if (user._id !== "-1") {
+        
+
+        if (user.id !== "-1") {
             dispatch(login(user));
 
             setTimeout(() => {
@@ -97,7 +113,7 @@ export const Login = () => {
                                         auth.auth ?
                                             <Alert variant="success">Logged In!</Alert>
                                             :
-                                            <Alert variant="danger">Invalid Credentials</Alert>
+                                            <Alert variant="danger">Invalid Credentials </Alert>
                                     ) : (
                                         <></>
                                     )}
@@ -108,4 +124,5 @@ export const Login = () => {
             </Container>
         </>
     );
+    
 }
