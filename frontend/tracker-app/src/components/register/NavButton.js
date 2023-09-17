@@ -12,21 +12,34 @@ const NavButton = () => {
     console.log(user);
     dispatch(info({ ...user, nextClick: true }));
 
-    if (user.username.length > 3 && page === 0) {
-      dispatch(next());
-      dispatch(info({ ...user, nextClick: false }));
-    }
 
-    if (page !== 0) {
+const NavButton = () => {
+  const page=useSelector((e)=>e.page.value);
+  const user=useSelector(e=>e.user.value)
+  const dispatch=useDispatch();
+  const nextClick=()=>{
+    console.log(user)
+    dispatch(info({...user,nextClick:true}));
+    if(user.username.length > 3 && page===0){
       dispatch(next());
-
-      // Call handleApiResponse when page is 3
-      // if (page === 3) {
-      //   // Call RegistrationApi with user data and the callback
-      //   RegistrationApi(user, handleApiResponse);
-     // }
+      dispatch(info({...user,nextClick:false}))
+    } 
+    if (user.sex.length > 3 && page===1){
+      dispatch(next());
+      dispatch(info({...user,nextClick:false}))
     }
+    // if(page!==0){
+    //   dispatch(next());
+    
+    // Call handleApiResponse when page is 3
+    // if (page === 3) {
+    //   // Call RegistrationApi with user data and the callback
+    //   RegistrationApi(user, handleApiResponse);
+    // }
+    
+  }
   };
+
 
   return (
     <div className="navigation btnRight">
