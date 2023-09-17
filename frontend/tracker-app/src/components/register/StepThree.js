@@ -59,7 +59,7 @@ const StepThree = () => {
     Object.values(level).map((e, i) => { if (e === true) x = i; });
     Object.keys(level).map((e, i) => { if (i === x) activityLevel = e; });
     
-    dispatch(info({ ...user, level: activityLevel }));
+    dispatch(info({ ...user, level: activityLevel.toUpperCase() })); // Convert to uppercase
     //eslint-disable-next-line
   }, [user.nextClick, level]);  
 
