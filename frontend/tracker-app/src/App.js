@@ -5,7 +5,7 @@ import { Home } from "./components/Home";
 import { NavBar } from "./components/Navbar";
 import { Register } from "./components/register/Register";
 import { Login } from "./components/Login";
-import { Dashboard } from "./components/Dashboard";
+
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+
         </Routes>
       </div>
     </BrowserRouter>
