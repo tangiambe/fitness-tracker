@@ -55,7 +55,6 @@ export const Login = () => {
 
             Cookies.set('loggedIn', 'true'); // Set a cookie indicating the user is logged in
             Cookies.set('userId', user.id); 
-            console.log(user.id``);
 
             setTimeout(() => {
                 navigate("/dashboard");
