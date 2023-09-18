@@ -1,0 +1,24 @@
+/* Dashboard.css */
+
+/* Reset margins and padding for relevant elements */
+
+.container-fluid-wrapper
+{
+    margin: 5%;
+}
+  
+  .row {
+    margin: 0;
+  }
+  
+  /* Additional reset for Bootstrap columns (if needed) */
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    padding: 0;
+    margin: 0;
+  }
+  .custom-col  {
+    margin: 1%;
+  }
+  .center-align {
+    text-align: center;
+  }
