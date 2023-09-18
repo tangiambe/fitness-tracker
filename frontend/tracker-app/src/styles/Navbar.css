@@ -1,0 +1,35 @@
+.nav-title {
+    text-decoration: none;
+    color: #FF914D;
+    font-size: 30px;
+     
+}
+
+.nav-title:hover {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 30px;
+}
+
+
+.nav-link{
+    text-decoration: none;
+    color: #FFF;
+    font-size: 25px;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    color: #FF914D;
+    font-size: 25px;  
+}
+
+.trivNavBar {
+    z-index: 1000;
+    background-color: #2a4f62;
+    background-image: linear-gradient(to top, #517FA4 0%, #517FA4 100%);
+    padding-top: 2%;
+    padding-bottom: 0%;
+    font-size: 20px;
+    color: #FFF;
+}

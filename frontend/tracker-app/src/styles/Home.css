@@ -1,0 +1,93 @@
+#wrapper {
+    background-color: #2a4f62;
+    background-image: linear-gradient(to top, #243949 0%, #517FA4 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#homePageCol{
+    height: 85vh;
+}
+
+.home-page {
+    text-align: center;
+    color: #fff
+}
+
+.home-page h1 {
+    font-size: 70px;
+    color: #FF914D;
+}
+
+.home-page h3 {
+    font-size: 40px;
+}
+
+.home-page h4 {
+    font-size: 20px;
+    padding-bottom: 3%;
+}
+
+.register-btn {
+    color: #fff;
+    padding: 8px 22px 7px;
+    border: 1px solid #FF914D;
+    background-color: #2b58763b;
+    margin-right: 4%;
+    border-radius: 25px; 
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.login-btn {
+    color: #fff;
+    padding: 8px 30px 7px;
+    border: 1px solid #FF914D;
+    background-color: #2B58763b;
+    margin-right: 3%;
+    border-radius: 25px; 
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.register-btn:hover {
+    background-color: #3c7aa4af;
+    border: 1px solid #FF914D;
+}
+
+.login-btn:hover {
+    background-color: #3c7aa4af;
+    border: 1px solid #FF914D;
+}
+
+.back-img {
+    width: 250px;
+    height: 300px;
+}
+
+.center {
+      position: absolute;
+      left: 50%;
+      top: 35%;
+      width:500px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+} 
+
+@media (prefers-reduced-motion: no-preference) {
+    .back-img {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
