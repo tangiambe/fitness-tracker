@@ -15,8 +15,13 @@ const NavButton = () => {
     if(user.username.length > 3 && page===0){
       dispatch(next());
       dispatch(info({...user,nextClick:false}))
-    } 
-    if (user.sex.length > 3 && page===1){
+    } else if (user.sex.length > 3 && page===1){
+      dispatch(next());
+      dispatch(info({...user,nextClick:false}))
+    } else if (user.level.length > 0 && page === 2){
+      dispatch(next());
+      dispatch(info({...user,nextClick:false}))
+    } else if (user.goal.length > 0 && page === 3){
       dispatch(next());
       dispatch(info({...user,nextClick:false}))
     }

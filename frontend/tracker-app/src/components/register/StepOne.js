@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup'
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -96,7 +95,7 @@ const StepOne = () => {
 
   return (
     <div className="info">
-      <h2>Account Info</h2>
+      <h2>Let's first fill out some account details.</h2>
       <Form className="form">
         <Row>
           <Col>

@@ -5,8 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup'
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import {faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -18,13 +17,11 @@ const StepTwo = () => {
   const refAge = useRef();
   const refHeight = useRef();
   const refWeight = useRef();
-  const refTimezone = useRef();
 
   const [account, setAcc] = useState({
     age: "",
     height: "",
-    weight: "",
-    timezone: "",
+    weight: ""
   });
 
   const [sex, setSex] = useState({
@@ -56,41 +53,50 @@ const StepTwo = () => {
 
   useEffect(() => {
     refAge.current.value = user.age;
-    // refHeight.current.value = user.height;
-    // refWeight.current.value = user.weight;
-    // refTimezone.current.value = user.timezone;
+    refHeight.current.value = user.height;
+    refWeight.current.value = user.weight;
 
     dispatch(info({
-      ...user, age: refAge.current.value//, height: refHeight.current.value, weight: refWeight.current.value, timezone: refTimezone.current.value}));
+      ...user, age: refAge.current.value, height: refHeight.current.value, weight: refWeight.current.value}));
+
       //eslint-disable-next-line
-    }))
   }, [])
 
 
   useEffect(() => {
     dispatch(info({
-      ...user, age: refAge.current.value //, height: refHeight.current.value, weight: refWeight.current.value, timezone: refTimezone.current.value}));
+      ...user, age: refAge.current.value, height: refHeight.current.value, weight: refWeight.current.value}));
+      
       //eslint-disable-next-line
-    }))
-  }, [account.age, account.height, account.weight, account.timezone]);
+  }, [account.age, account.height, account.weight]);
 
 
   
 
   const AGE_REGEX = /^(?:1[01][0-9]|120|1[3-9]|[2-9][0-9])$/
-  const EMPTY_REGEX = /male/
+  // const SEX_REGEX = /male/
+  const HEIGHT_REGEX = /^(?:4[8-9]|[5-8][0-9])$/
+  const WEIGHT_REGEX = /^(?:[1-6][0-9][0-9]|[7-9][0-9])$/
 
-  const checked = e => {
-    return EMPTY_REGEX.test(e);
-  }
+  // const checked = e => {
+  //   return SEX_REGEX.test(e);
+  // }
   
   const validAge = e => {
     return AGE_REGEX.test(e);
   }
 
+  const validHeight = e => {
+    HEIGHT_REGEX.test(e)
+  }
+
+  const validWeight = e => {
+    WEIGHT_REGEX.test(e)
+  }
+
   return (
     <div className="info">
-      <h2>User Details</h2>
+      <h2>Hi {user.fname}! Just a little bit more about you.</h2>
       {/* <p>All fields are required</p> */}
       <div className="form">
         <Row>
@@ -148,9 +154,9 @@ const StepTwo = () => {
                 <Form.Label>
                 Height
               </Form.Label>
-                  {/* {user.nextClick && (
+                  {user.nextClick && (
                     <span>{user.height === "" ? "This field is required" : !validHeight(user.height)}</span>
-                  )} */}
+                  )}
                 </div>
                 <Form.Control
                   required
@@ -158,8 +164,8 @@ const StepTwo = () => {
                   ref={refHeight}
                   autoComplete="off"
                   placeholder="in."
-                  // className={!validHeight(user.height) && user.nextClick ? "erorr" : ""}
-                  // onChange={e => setAcc({ ...account, height: e.target.value })}
+                  className={!validHeight(user.height) && user.nextClick ? "erorr" : ""}
+                  onChange={e => setAcc({ ...account, height: e.target.value })}
                 />
 
               </div>
@@ -172,9 +178,9 @@ const StepTwo = () => {
                 <Form.Label>
                 Weight
               </Form.Label>
-                  {/* {user.nextClick && (
+                  {user.nextClick && (
                     <span>{user.weight === "" ? "This field is required" : !validWeight(user.weight)}</span>
-                  )} */}
+                  )}
                 </div>
                 <Form.Control
                   required
@@ -182,15 +188,12 @@ const StepTwo = () => {
                   ref={refWeight}
                   autoComplete="off"
                   placeholder="lbs"
-                  // className={!validWeight(user.weight) && user.nextClick ? "erorr" : ""}
-                  // onChange={e => setAcc({ ...account, weight: e.target.value })}
+                  className={!validWeight(user.weight) && user.nextClick ? "erorr" : ""}
+                  onChange={e => setAcc({ ...account, weight: e.target.value })}
                 />
               </div>
             </div>
           </Col>
-        </Row>
-        <Row>
-          {/* Timezone */}
         </Row>
       </div>
     </div>
