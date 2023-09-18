@@ -15,6 +15,9 @@ const Success = () => {
       userName: user.username,
       password: user.password,
       activityType: user.level, // Assuming 'level' is a property in your user object
+      age: user.age,
+      height: user.height,
+      weight: user.weight
     };
 
     // Send a POST request to the server
