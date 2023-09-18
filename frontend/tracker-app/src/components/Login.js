@@ -10,6 +10,8 @@ import { login } from "../redux/userSlice";
 import { Alert } from "react-bootstrap";
 import InputGroup from 'react-bootstrap/InputGroup'
 import UserApi from "../api/UserApi";
+import Cookies from 'js-cookie'; // Import the js-cookie library
+
 
 
 export const Login = () => {
@@ -50,6 +52,10 @@ export const Login = () => {
 
         if (user.id !== "-1") {
             dispatch(login(user));
+
+            Cookies.set('loggedIn', 'true'); // Set a cookie indicating the user is logged in
+            Cookies.set('userId', user.id); 
+            console.log(user.id``);
 
             setTimeout(() => {
                 navigate("/dashboard");

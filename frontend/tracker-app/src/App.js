@@ -5,7 +5,7 @@ import { Home } from "./components/Home";
 import { NavBar } from "./components/Navbar";
 import { Register } from "./components/register/Register";
 import { Login } from "./components/Login";
-
+import { Dashboard } from "./components/dashboard/Dashboard";
 
 
 function App() {
