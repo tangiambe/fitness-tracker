@@ -17,12 +17,16 @@ export const Register = () => {
     const PageDisplay = () => {
         switch (page) {
             case 0:
+                // Account Details
                 return <StepOne />
             case 1:
+                // User Details
                 return <StepTwo />
             case 2:
+                // Activity Level
                 return <StepThree />
             case 3:
+                // User Goal
                 return <StepFour />
             case 4:
                 return <Success />

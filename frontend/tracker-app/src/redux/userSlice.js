@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
 export const userSlice = createSlice({
   name: "user",
@@ -14,7 +15,7 @@ export const userSlice = createSlice({
       age: "",
       height: "",
       weight: "",
-      timezone: "",
+      timezone: timeZone,
       level:"",
       goal:"",
       // nextPermutation: false,
