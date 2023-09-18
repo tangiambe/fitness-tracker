@@ -87,59 +87,59 @@ const dailyCaloricGoal = Math.round(userData.goal.dailyCaloricGoal / 100) * 100;
 
 
 
-  return(
-    <div>
-    <h3 className="center-align">{userData ? `${userData.firstName} ${userData.lastName}'s Daily Tracker` : 'Loading...'}</h3>
-      <h3 className="center-align"> <DateTimeDisplay /></h3><br/><br/>
- {/* Displaying the 'dailyCaloricGoal' property */}
- <p className="center-align">Daily Caloric Goal: {dailyCaloricGoal} calories</p>
-    {/* Displaying the 'dailyStepsGoal' property */}
-    <p className="center-align">Daily Steps Goal: {userData ? userData.goal.dailyStepsGoal : 'Loading...'} steps</p>
-    <div className="container-fluid-wrapper"> {/* Wrapper with margin */}
+  return (
+    <div fluid id="wrapper" className="d-flex align-items-center">
+      <h3 className="center-align">{userData ? `${userData.firstName} ${userData.lastName}'s Daily Tracker` : 'Loading...'}</h3>
+      <h3 className="center-align"> <DateTimeDisplay /></h3><br /><br />
+      {/* Displaying the 'dailyCaloricGoal' property */}
+      <p className="center-align">Daily Caloric Goal: dailyCaloricGoal calories</p>
+      {/* Displaying the 'dailyStepsGoal' property */}
+      <p className="center-align">Daily Steps Goal: {userData ? userData.goal.dailyStepsGoal : 'Loading...'} steps</p>
+      <div className="container-fluid-wrapper"> {/* Wrapper with margin */}
         <div className="container-fluid">
           <div className="row">
-          <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(0)) } content={"Content"} />
-            </div>    
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(1)) } content={"Content"} />
-            </div>    
-            <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(2)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(0))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(3)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(1))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(4)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(2))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(5)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(3))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(6)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(4))} content={"Content"} />
+            </div>
+            <div className="col custom-col" >
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(5))} content={"Content"} />
+            </div>
+            <div className="col custom-col" >
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(6))} content={"Content"} />
             </div>
             <div className="w-100"></div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(7)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(7))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(8)) } content={"Content"} />
-            </div>    
-            <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(9)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(8))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(10)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(9))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(11)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(10))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(12)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(11))} content={"Content"} />
             </div>
             <div className="col custom-col" >
-            <BootstrapCard title={formatDateAsMMMDD(subtractDays(13)) } content={"Content"} />
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(12))} content={"Content"} />
+            </div>
+            <div className="col custom-col" >
+              <BootstrapCard title={formatDateAsMMMDD(subtractDays(13))} content={"Content"} />
             </div>
 
 
@@ -147,7 +147,7 @@ const dailyCaloricGoal = Math.round(userData.goal.dailyCaloricGoal / 100) * 100;
         </div>
       </div>
 
- 
+
     </div>
   );
 }

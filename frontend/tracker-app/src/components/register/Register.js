@@ -18,7 +18,7 @@ export const Register = () => {
         switch (page) {
             case 0:
                 // Account Details
-                return <StepFour />
+                return <StepOne />
             case 1:
                 // User Details
                 return <StepTwo />
