@@ -84,7 +84,6 @@ function formatDateAsMMMDD(inputDate) {
   return formattedDate;
 }
 const dailyCaloricGoal = Math.round(userData.goal.dailyCaloricGoal / 100) * 100;
-//const dailyCaloricGoal = 0
 
 
 
@@ -94,7 +93,6 @@ const dailyCaloricGoal = Math.round(userData.goal.dailyCaloricGoal / 100) * 100;
       <h3 className="center-align"> <DateTimeDisplay /></h3><br/><br/>
  {/* Displaying the 'dailyCaloricGoal' property */}
  <p className="center-align">Daily Caloric Goal: {dailyCaloricGoal} calories</p>
-    
     {/* Displaying the 'dailyStepsGoal' property */}
     <p className="center-align">Daily Steps Goal: {userData ? userData.goal.dailyStepsGoal : 'Loading...'} steps</p>
     <div className="container-fluid-wrapper"> {/* Wrapper with margin */}
@@ -148,6 +146,7 @@ const dailyCaloricGoal = Math.round(userData.goal.dailyCaloricGoal / 100) * 100;
           </div>
         </div>
       </div>
+
  
     </div>
   );
