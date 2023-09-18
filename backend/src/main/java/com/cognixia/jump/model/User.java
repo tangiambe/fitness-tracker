@@ -57,36 +57,42 @@ public class User implements Serializable {
 	private Integer id;
 	
 	@NotBlank(message = "First name cannot be left blank")
-	private String firstName;
+	private String firstName = "Not Found";
 	
 	@NotBlank(message = "Last name cannot be left blank")
-	private String lastName;
+	private String lastName = "Not Found";
 	
 	@Column(unique = true, nullable = false)
 	@NotBlank(message = "Username cannot be left blank")
-	private String userName;
+	private String userName = "notfound";
+	
+	@Pattern(regexp = "^.+@.+$", message="Not formatted like an email") // checking there's an @ in the email
+	@Column( unique = true, nullable = false )  
+	private String email = "test@aol.com";
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Password cannot be left blank")
-	private String password;
+	private String password = "Password123!";
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)	
-	private Sex sex;
+	private Sex sex = Sex.MALE;
 	
 	@Min(value =13, message = "Minimum Age is 13")
 	@Column(nullable = false)	
-	private int age;
+	private int age=30;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private TrackType trackType;	
+	private TrackType trackType=TrackType.WEIGHT_MAINTAIN;	
 	
 	@Positive(message = "Please enter Positive Height")
-	private int height;
+	private int height=54;
 	
 	@Positive(message = "Please enter Positive Weight")
-	private int weight;
+	private int weight=200;
+	
+	private boolean enabled = false;
 	
 
 	//Ativity Level to calculate tdee
@@ -109,9 +115,7 @@ public class User implements Serializable {
     @JsonIgnore // Add this annotation to prevent infinite recursion
     private Tracker tracker;
     
-	@Pattern(regexp = "^.+@.+$", message="Not formatted like an email") // checking there's an @ in the email
-	@Column( unique = true, nullable = false )  
-	private String email;
+
 		
 	public User() {}
 
@@ -278,7 +282,13 @@ public class User implements Serializable {
 	public void setActivityType(ActiveType activityType) {
 		this.activityType = activityType;
 	}
+	public boolean isEnabled() {
+		return enabled;
+	}
 
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	
 
 }

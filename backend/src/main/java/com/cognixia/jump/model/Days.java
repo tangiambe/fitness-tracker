@@ -31,8 +31,8 @@ public class Days implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private double totalDailySteps;
-    private double totalCaloriesConsumed;
+    private double totalDailySteps = 0;
+    private double totalCaloriesConsumed = 0;
 
     @ManyToOne
     @JoinColumn(name = "tracker_id")

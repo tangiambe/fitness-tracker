@@ -40,18 +40,13 @@ public class DaysController {
 	NutritionAPIService apiService;	
 	
 	
-	//http://localhost:8080/api/user/{{userId}}
+	//http://localhost:8080/api/days/{{userId}}
 	@GetMapping("/days/{id}")
 	public ResponseEntity<?> getDaysById(@PathVariable Integer id) {
 		
 		List<Days> daysList = daysRepo.findAllByTrackerUser_Id(id);
-		
-		if(daysList.isEmpty()) {
-			return ResponseEntity.status(404).body("User not found");
-		}
-		else {
 			return ResponseEntity.status(200).body(daysList);
-		}
+		
 	}	
 
 	//http://localhost:8080/api/days/2/hamburger

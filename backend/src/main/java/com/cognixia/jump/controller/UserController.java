@@ -5,17 +5,16 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.cognixia.jump.model.User;
-import com.cognixia.jump.model.User.ActiveType;
-import com.cognixia.jump.model.User.Sex;
-import com.cognixia.jump.model.User.TrackType;
 import com.cognixia.jump.repository.UserRepository;
 import com.cognixia.jump.service.ControllerService;
 
@@ -48,7 +47,8 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/user")
+	//http://localhost:8080/api/register
+	@PostMapping("/register")
 	public ResponseEntity<?> createUser( @RequestBody User user ) {
 		
 		User save = service.insertNewUser(user.getFirstName(), user.getLastName(), user.getEmail(),
@@ -58,5 +58,24 @@ public class UserController {
 		User created = repo.save(save);
 		return ResponseEntity.status(201).body(created);
 	}
+	//http://localhost:8080/api/login
+	@PostMapping("/login")
+	public User loginUser( @RequestBody User user ) {
+		System.out.println(user.getUserName() + " " +user.getPassword() );
+		return service.checkLogin(user.getUserName(), user.getPassword());
+	}
+		
+		
+	
+	
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        try {
+            service.deleteUser(id);
+            return ResponseEntity.ok("Deleted User");
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+        }
+    }
 
 }
