@@ -9,8 +9,10 @@ import java.util.Optional;
 import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.cognixia.jump.dto.DaysWithTrackerDTO;
 import com.cognixia.jump.model.Days;
@@ -298,8 +300,28 @@ public class ControllerService {
 	    // Update nutrition properties
 	    updateNutritionProperties(trackerId, nutritionId, quantityToAdd, caloriesToAdd, servingSizeToAdd, entryDate);
 	}
+    public boolean deleteUser(int id) {
+        boolean exists = userRepo.existsById(id);
 
-
+        if (exists) {
+            userRepo.deleteById(id);
+            return true;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID " + id + " not found");
+        }
+    }
+    public User checkLogin(String userName, String password) { 
+    		
+    	Optional<User> user = userRepo.findByUserNameContainingAndPasswordContaining(userName, password);
+    	
+    	if(user.isEmpty()) {
+    		User noUser = new User();
+    		noUser.setId(-1);
+    		return noUser;
+    	}
+    	user.get().setEnabled(true);
+    	
+    	return user.get();    }
 }
 
 
