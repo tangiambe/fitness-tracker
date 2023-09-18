@@ -149,14 +149,14 @@ main {
   border: none;
   color: white;
   border-radius: 10px;
-  /* margin-left: 105%; */
+  /* margin-right: 17%; */
 }
 
 .btnRight {
   -webkit-box-pack: right !important;
       -ms-flex-pack: right !important;
           justify-content: right !important;
-          margin-left: 10%;
+          margin-left:7%;
 }
 
 
@@ -419,43 +419,76 @@ i {
   margin-bottom: 30px;
 }
 
+
 .goalClick {
   border: #FF914D 2px solid !important;
   transform: scale(1.05);
 }
 
 .goalCard {
-  width: 107%;
-  padding: 20px 15px 120px 15px;
+  width:100%;
+  padding: 20px 10px 10px 10px;
+  margin-top: 30px;
   border: #d6d9e6 1px solid;
   border-radius: 10px;
   cursor: pointer;
-  background-image: linear-gradient(#243949 -50%, #517FA4 90%);
+  background-image: linear-gradient(#24394943 -50%, #517FA4 90%);
   transition: transform .2s;
 }
 
 .goalCard:hover {
-  border: #FF914D 2px solid !important;
-  transform: scale(1.03);
+  border: #FF914D 1px solid !important;
+  transform: scale(1.02);
 }
 
 .goalCard .title {
   /* margin-top: 70px; */
   /* margin-top: 0px; */
-  padding-bottom: 100px;
+  padding-bottom:60px;
   text-align: center;
 
 }
 
-.goalCard .title h3 {
-  font-size: 18px;
+.goalCard .title h2 {
+  padding-top: 10px;
+  /* font-size: 28px; */
   color: #fff;
+  /* color: #FF914D; */
 }
+
+.goalCard .title h3 {
+  padding-top: 10px;
+  font-size:25px;
+  color: #fff;
+  /* color: #FF914D; */
+}
+
+.goalCard .title:hover h2 {
+  padding-top: 10px;
+  /* font-size: 28px; */
+  /* color: #fff; */
+  color: #FF914D;
+}
+
+.goalCard .title:hover h3 {
+  padding-top: 10px;
+  font-size:25px;
+  /* color: #fff; */
+  color: #FF914D;
+}
+
+
 
 .goalCard .title p {
   margin-top: 10px;
-  font-size: 14px;
-  text-align: left;
+  font-size: 20px;
+  text-align: center;
+}
+
+.goalCard .title hr {
+  text-align: center;
+  /* border-top: 1px solid #02295a; */
+  border-top: 1px solid #FFF;
 }
 
 /* SUCCESS */

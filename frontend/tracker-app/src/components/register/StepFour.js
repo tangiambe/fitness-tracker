@@ -8,8 +8,9 @@ const Goal = ({ title, description, selected }) => {
   return (
     <div className={selected ? 'goalCard goalClick' : 'goalCard'}>
       <div className='title'>
-        <h3>{title}</h3>
-        <p>{description}</p>
+        <h2>{title}</h2>
+        <hr></hr>
+        <h3>{description}</h3>
       </div>
     </div>
   )
@@ -57,21 +58,21 @@ const StepFour = () => {
         <div onClick={() => setGoal({ lose: true, maintain: false, gain: false, })}>
           <Goal
             title={"Lose"}
-            description={"Sedentary or no exercise"}
+            description={"Lose 1 lb/week"}
             selected={goal.lose}
           />
         </div>
         <div onClick={() => setGoal({ lose: false, maintain: true, gain: false, })}>
           <Goal
             title={"Maintain"}
-            description={"Sedentary or no exercise"}
+            description={"Keep current weight"}
             selected={goal.maintain}
           />
         </div>
         <div onClick={() => setGoal({ lose: false, maintain: false, gain: true, })}>
           <Goal
             title={"Gain"}
-            description={"Sedentary or no exercise"}
+            description={"Gain 1 lb/week"}
             selected={goal.gain}
           />
         </div>

@@ -104,12 +104,6 @@ import shine from "../../images/shine.svg";
         });
         return formattedDate;
       }
-
-
-
-
-
-
   return(
     <div>
     <h3 className="center-align">{Cookies.get('fname')} {Cookies.get('lname')}'s Daily Tracker</h3>
@@ -142,12 +136,9 @@ import shine from "../../images/shine.svg";
                 {index === 6 && <div key={`w-100-${index}`} className="w-100"></div>}
               </>
             ))}
-
           </div>
         </div>
       </div>
-
- 
     </div>
   );
 }
