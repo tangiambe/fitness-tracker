@@ -7,6 +7,7 @@ import { Register } from "./components/register/Register";
 import { Login } from "./components/Login";
 
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+
         </Routes>
       </div>
     </BrowserRouter>

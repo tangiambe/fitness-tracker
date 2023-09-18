@@ -26,7 +26,7 @@ const StepThree = () => {
     light: false,
     moderate: false,
     very: false,
-    super: false
+    super: false,
   });
 
   useEffect(()=>{
@@ -45,7 +45,7 @@ const StepThree = () => {
         break;
       case "super":
         setLevel({none: false, light: false, moderate: false, very: false, super: true});
-        break;      
+        break;
     }
     //eslint-disable-next-line
   },[])
@@ -64,8 +64,8 @@ const StepThree = () => {
 
   return (
     <div className="Plan info">
-      <h2>Activity Level</h2>
-      <p>Choose a level that best describes your physical activity every day.</p>
+      <h2>How active are you every week?</h2>
+      <p>Choose a level that best describes your physical activity.</p>
       <div className="plansCrads">
         
         <Row onClick={()=>setLevel({none: true, light: false, moderate: false, very: false, super: false})}>

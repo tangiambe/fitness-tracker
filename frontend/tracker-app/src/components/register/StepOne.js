@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup'
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -74,16 +73,6 @@ const StepOne = () => {
     return PWD_REGEX.test(e);
   }
 
-
-
-  useEffect(() => {
-    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
-    //eslint-disable-next-line
-  }, [account.fname, account.lname, account.username, account.email, account.password]);
-
-
-
-
   useEffect(() => {
     refFname.current.value = user.fname;
     refLname.current.value = user.lname;
@@ -96,9 +85,17 @@ const StepOne = () => {
   }, [])
 
 
+  useEffect(() => {
+    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
+    //eslint-disable-next-line
+  }, [account.fname, account.lname, account.username, account.email, account.password]);
+
+
+
+
   return (
     <div className="info">
-      <h2>Account Info</h2>
+      <h2>Let's first fill out some account details.</h2>
       <Form className="form">
         <Row>
           <Col>
@@ -154,7 +151,7 @@ const StepOne = () => {
           <Col>
             <div className="fields">
               <div className="dflex">
-                <Form.Label className="user-label">
+                <Form.Label>
                   Username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <FontAwesomeIcon icon={faCheck} className={validUsername(user.username) ? "valid" : "hide"} />
                 </Form.Label>
