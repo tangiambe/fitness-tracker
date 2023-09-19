@@ -27,80 +27,75 @@ import com.cognixia.jump.service.NutritionAPIService;
 @RestController
 @RequestMapping("/api/")
 public class DaysController {
-	
+
 	@Autowired
 	DaysRepository daysRepo;
 	@Autowired
-	TrackerRepository trackerRepo;	
-	
+	TrackerRepository trackerRepo;
+
 	@Autowired
 	ControllerService service;
-	
+
 	@Autowired
-	NutritionAPIService apiService;	
-	
-	
-	//http://localhost:8080/api/days/{{userId}}
+	NutritionAPIService apiService;
+
+	// http://localhost:8080/api/days/{{userId}}
 	@GetMapping("/days/{id}")
 	public ResponseEntity<?> getDaysById(@PathVariable Integer id) {
-		
-		List<Days> daysList = daysRepo.findAllByTrackerUser_Id(id);
-			return ResponseEntity.status(200).body(daysList);
-		
-	}	
 
-	//http://localhost:8080/api/days/2/hamburger
+		List<Days> daysList = daysRepo.findAllByTrackerUser_Id(id);
+		return ResponseEntity.status(200).body(daysList);
+
+	}
+
+	// http://localhost:8080/api/days/2/hamburger
 	@PostMapping("/days/{trackerId}/{food}")
 	public ResponseEntity<?> postNutrition(@PathVariable Integer trackerId,
-											@PathVariable String food) {
+			@PathVariable String food) {
 		Optional<Nutrition> nutrition = apiService.parseAPI(food);
 		Optional<Tracker> tracker = trackerRepo.findById(trackerId);
-		if(nutrition.isEmpty()) {
+		if (nutrition.isEmpty()) {
 			return ResponseEntity.status(404).body("Food not found");
-		}
-		else if (tracker.isEmpty()) {
+		} else if (tracker.isEmpty()) {
 			return ResponseEntity.status(404).body("TrackerId not found");
-		}
-		else {
+		} else {
 			Days save = service.addFood(tracker.get(), nutrition.get(), LocalDate.now());
 			return ResponseEntity.status(201).body(save);
 		}
 	}
-	
-	//http://localhost:8080/api/tracker/2/nutritionOnDate
-	
-	
-    @PostMapping("/days/{trackerId}/nutritionOnDate")
-    public ResponseEntity<?> addNutritionDifferentDate(
-            @PathVariable Integer trackerId,
-            @RequestBody NutritionRequestDTO nutritionRequestDTO) {
 
-        // Fetch the Tracker by trackerId (You can implement this method in your service)
-    	Optional<Tracker> tempTracker = trackerRepo.findById(trackerId);
+	// http://localhost:8080/api/tracker/2/nutritionOnDate
 
-        if (tempTracker == null) {
-            return ResponseEntity.notFound().build();
-        }
-        Tracker tracker = tempTracker.get();
-        
-        // Extract the Nutrition and entryDate from the DTO
-        
-        String food= nutritionRequestDTO.getFood();
-        
-        Optional<Nutrition> nutrition = apiService.parseAPI(food);
-        
-		if(nutrition.isEmpty()) {
+	@PostMapping("/days/{trackerId}/nutritionOnDate")
+	public ResponseEntity<?> addNutritionDifferentDate(
+			@PathVariable Integer trackerId,
+			@RequestBody NutritionRequestDTO nutritionRequestDTO) {
+
+		// Fetch the Tracker by trackerId (You can implement this method in your
+		// service)
+		Optional<Tracker> tempTracker = trackerRepo.findById(trackerId);
+
+		if (tempTracker == null) {
+			return ResponseEntity.notFound().build();
+		}
+		Tracker tracker = tempTracker.get();
+
+		// Extract the Nutrition and entryDate from the DTO
+
+		String food = nutritionRequestDTO.getFood();
+
+		Optional<Nutrition> nutrition = apiService.parseAPI(food);
+
+		if (nutrition.isEmpty()) {
 			return ResponseEntity.status(404).body("Food not found");
 		}
-        
 
-        // Add the Nutrition to the Tracker for the specified entryDate
+		// Add the Nutrition to the Tracker for the specified entryDate
 		LocalDate entryDate = nutritionRequestDTO.getEntryDate();
 		Days save = service.addFood(tracker, nutrition.get(), entryDate);
 
-        // Return the updated Tracker
-        return ResponseEntity.ok(save);
-    }
-
+		// Return the updated Tracker
+		return ResponseEntity.ok(save);
+	}
 
 }
