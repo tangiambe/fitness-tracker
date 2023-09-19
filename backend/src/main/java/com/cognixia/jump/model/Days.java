@@ -23,7 +23,6 @@ public class Days implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
     @Temporal(TemporalType.DATE) // For using java.util.Date
     private LocalDate entryDate; // Date associated with the entry
 
@@ -38,7 +37,7 @@ public class Days implements Serializable {
     @JoinColumn(name = "tracker_id")
     @JsonBackReference // Use this annotation to prevent serialization loop
     private Tracker tracker;
-    
+
     @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Nutrition> nutritions = new ArrayList<>();
 
@@ -94,13 +93,11 @@ public class Days implements Serializable {
         this.entryDate = entryDate;
     }
 
-	public List<Nutrition> getNutritions() {
-		return nutritions;
-	}
+    public List<Nutrition> getNutritions() {
+        return nutritions;
+    }
 
-	public void setNutritions(List<Nutrition> nutritions) {
-		this.nutritions = nutritions;
-	}
-    
-    
+    public void setNutritions(List<Nutrition> nutritions) {
+        this.nutritions = nutritions;
+    }
 }
