@@ -83,7 +83,7 @@ function Dashboard() {
         return formattedDate;
       }
     return (
-      <div className="container-fluid-wrapper"> {/* Wrapper with margin */}
+      <div fluid id="wrapper"> {/* Wrapper with margin */}
         <div className="container-fluid">
           {[...Array(2).keys()].map((rowIndex) => (
             <div className="row" key={`row-${rowIndex}`}>
