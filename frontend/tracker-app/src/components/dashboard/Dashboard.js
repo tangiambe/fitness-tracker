@@ -84,6 +84,15 @@ function Dashboard() {
       }
     return (
       <div fluid id="wrapper"> {/* Wrapper with margin */}
+        <div>
+          <h3 className="center-align">{Cookies.get('fname')} {Cookies.get('lname')}'s Daily Tracker</h3>
+          <h3 className="center-align"> <DateTimeDisplay /></h3><br/><br/>
+          {/* Displaying the 'dailyCaloricGoal' property */}
+          <p className="center-align">Daily Caloric Goal:  {Cookies.get('dailyCaloricGoal')} calories</p>
+          {/* Displaying the 'dailyStepsGoal' property */}
+          <p className="center-align">Daily Steps Goal: {Cookies.get('dailyStepsGoal')} steps</p>
+
+        </div>
         <div className="container-fluid">
           {[...Array(2).keys()].map((rowIndex) => (
             <div className="row" key={`row-${rowIndex}`}>
