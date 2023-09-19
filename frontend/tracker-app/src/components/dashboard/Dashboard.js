@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/Dashboard.css'; // Import the CSS file
 import BootstrapCard from '../dashboard/BootstrapCard';
 import DateTimeDisplay from './DateTimeDisplay'; // Adjust the path as needed
-import { findTotalDailyStepsByDate, findTotalCaloriesConsumedByDate, findDayIdByDate } from '../../helpers/dateHelpers';
+import { findDayByDate } from '../../helpers/dateHelpers';
 
 import Cookies from 'js-cookie'; // Import the js-cookie library
 import axios from 'axios';
@@ -45,15 +45,6 @@ function Dashboard() {
         setDaysData(daysResponse.data);
 
         // Use the findDayIdByDate function to find the matching day's ID for the selectedDate
-        const matchingId = findDayIdByDate(daysResponse.data, selectedDate);
-
-        // Set the matching day in the state variable
-        if (matchingId !== null) {
-          const matching = daysResponse.data.find((day) => day.id === matchingId);
-          setMatchingDay(matching);
-        } else {
-          setMatchingDay(null);
-        }
 
         // Handle other API calls here if needed
       } catch (error) {
@@ -65,15 +56,12 @@ function Dashboard() {
     fetchData(); // Call the fetchData function
   }, [userApiUrl, daysApiUrl, selectedDate]);
 
-  // Use the matchingDay state variable to access its properties
-  const matchingDayId = matchingDay ? matchingDay.id : null;
-
-        function subtractDays(daysToSubtract) {
-        const currentDate = new Date();
-        const newDate = new Date(currentDate);
-        newDate.setDate(currentDate.getDate() - daysToSubtract);
-        return newDate;
-      }
+  function subtractDays(daysToSubtract) {
+    const currentDate = new Date();
+    const newDate = new Date(currentDate);
+    newDate.setDate(currentDate.getDate() - daysToSubtract);
+    return newDate;
+  }
 
       function formatDateAsMMMDD(inputDate) {
         const formattedDate = inputDate.toLocaleString('default', {
@@ -81,6 +69,12 @@ function Dashboard() {
           day: 'numeric',  // Day of the month (e.g., "17")
         });
         return formattedDate;
+      }
+      function formatDateAsYYYYMMDD(date) {
+        const year = String(date.getFullYear());
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
       }
     return (
       <div fluid id="wrapper"> {/* Wrapper with margin */}
@@ -99,21 +93,26 @@ function Dashboard() {
               {/* Display 7 cards in each row */}
               {[...Array(7).keys()].map((index) => {
                 // Calculate the date for this card
-                const cardDate = subtractDays(rowIndex * 7 + index);
+                const displayCardDate = formatDateAsMMMDD(subtractDays(rowIndex * 7 + index));
+                const matchingCardDate = subtractDays(rowIndex * 7 + index);
+
   
+                console.log('Days Data:', daysData);
                 // Use the matchingDay state variable to access its properties
-                const matchingDayId = matchingDay ? matchingDay.id : null;
+                const matchingDay = findDayByDate(daysData, matchingCardDate);
+                console.log('Matching Day:', matchingDay);
   
                 return (
                   <div key={index} className="col custom-col">
                     <BootstrapCard
-                      title={formatDateAsMMMDD(cardDate)}
+                      title={formatDateAsMMMDD(displayCardDate)}
                       content={
                         <ul className="list-group list-group-flush">
-                          <li className="list-group-item">Steps:</li>
-                          <li className="list-group-item">{matchingDayId ? matchingDayId.totalDailySteps : 'N/A'}</li>
-                          <li className="list-group-item">Calories Consumed:</li>
-                          <li className="list-group-item">{matchingDayId ? matchingDayId.totalCaloriesConsumed : 'N/A'}</li>
+                          <li className="list-group-item">Steps</li>
+                          <li className="list-group-item">{matchingDay ? matchingDay.totalDailySteps : '0'}</li>
+                          <li className="list-group-item">Calories:</li>
+                          <li className="list-group-item">{matchingDay ? Math.round(matchingDay.totalCaloriesConsumed) : '0'}</li>
+                          <li className="list-group-item"><a className="btn btn-primary" href="#" role="button">View Meals</a></li>
                           <li className="list-group-item"><a className="btn btn-primary" href="#" role="button">Add Meals</a></li>
                           <li className="list-group-item"><a className="btn btn-primary" href="#" role="button">Add Steps</a></li>
                         </ul>
