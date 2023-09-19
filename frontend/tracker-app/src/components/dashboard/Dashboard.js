@@ -22,7 +22,7 @@ import shine from "../../images/shine.svg";
         // Sample data for the card
         const [userData, setUserData] = useState(null);
         const [daysData, setDaysData] = useState(null);
-        const [reversedDaysData, setReversedDaysData] = useState(null);
+        const [reversedDaysData, setReversedDaysData] = useState([]);
 
         useEffect(() => {
           const fetchData = async () => {
@@ -71,9 +71,10 @@ import shine from "../../images/shine.svg";
               // Make the API request using Axios directly
               const daysResponse = await axios.get(daysApiUrl);
               // Handle the response data as needed
-              console.log(daysResponse.data);
+              
               setDaysData(daysResponse.data);
               setReversedDaysData([...daysData].reverse());
+              console.log(reversedDaysData);
 
 
 
