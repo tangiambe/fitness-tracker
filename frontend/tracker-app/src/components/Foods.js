@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import logo from "../images/logo.svg";
 import shine from "../images/shine.svg";
 
-export const Foodss = () => {
+export const Foods = () => {
 
     return (
         <>
