@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 import '../../styles/Dashboard.css'; // Import the CSS file
 import BootstrapCard from '../dashboard/BootstrapCard';
 import DateTimeDisplay from './DateTimeDisplay'; // Adjust the path as needed
 import { findTotalDailyStepsByDate, findTotalCaloriesConsumedByDate, findDayIdByDate } from '../../helpers/dateHelpers';
-
+import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'; // Import the js-cookie library
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
@@ -17,6 +18,16 @@ import logo from "../../images/logo.svg";
 import shine from "../../images/shine.svg";
 
 function Dashboard() {
+
+  const activeUser = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      if (activeUser._id === "-1") {
+          navigate("/login");
+      }
+  }, [activeUser, navigate])
+
   const userId = Cookies.get('userId');
   const userApiUrl = `http://localhost:8080/api/user/${userId}`;
   const daysApiUrl = `http://localhost:8080/api/days/${userId}`;

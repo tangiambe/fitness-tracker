@@ -17,12 +17,18 @@ import Cookies from 'js-cookie'; // Import the js-cookie library
 export const Login = () => {
 
     const [user, setUser] = useState({
-        id: "-1",
+        _id: "-1",
         firstName: "",
         lastName: "",
         username: "",
         email: "",
         password: "",
+        sex: "",
+        age: "",
+        height: "",
+        weight: "",
+        level: "",
+        goal: "",
     });
 
     const [auth, setAuth] = useState({ show: false, auth: false });
@@ -50,7 +56,7 @@ export const Login = () => {
     useEffect(() => {
         
 
-        if (user.id !== "-1") {
+        if (user._id !== "-1") {
             dispatch(login(user));
 
             Cookies.set('loggedIn', 'true'); // Set a cookie indicating the user is logged in

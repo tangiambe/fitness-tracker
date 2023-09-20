@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
+const initialState = {
+  _id: "-1",
+  firstName: "",
+  lastName: "",
+  username: "",
+  email: "",
+  password: "",
+  sex: "",
+  age: "",
+  height: "",
+  weight: "",
+  timezone: timeZone,
+  level: "",
+  goal: "",
+  nextClick: false
+}
+
+
 export const userSlice = createSlice({
   name: "user",
-  initialState: {
-    value: {
-      id: "-1",
-      fname: "",
-      lname:"",
-      username:"",
-      email: "",
-      password: "",
-      sex: "",
-      age: "",
-      height: "",
-      weight: "",
-      timezone: timeZone,
-      level:"",
-      goal:"",
-      // nextPermutation: false,
-      nextClick: false
-    },
-  },
+  initialState,
   reducers: {
     info: (state, action) => {
       state.value = action.payload;
