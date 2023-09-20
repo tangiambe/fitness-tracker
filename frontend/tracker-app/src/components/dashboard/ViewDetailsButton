@@ -1,0 +1,22 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+function ViewDetailsButton({ nutrition }) {
+  const viewDetailsClick = () => {
+    // Navigate to the /details page with nutrition as state
+    // You can specify the pathname and state here
+    // In this example, I assume the pathname is '/details'
+    // You can adjust it according to your route configuration
+    // Replace '/details' with the actual path to your details page
+    // And pass the 'nutrition' list as 'nutritions' state
+    window.location.href = '/details'; // Navigate to the details page
+  };
+
+  return (
+    <button className="btn btn-primary" onClick={handleButtonClick}>
+      View Meals
+    </button>
+  );
+}
+
+export default ViewDetailsButton;

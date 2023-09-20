@@ -1,15 +1,15 @@
 import React from "react";
-import '../styles/Details.css'
+import '../../styles/Details.css'
 import Container from 'react-bootstrap/Container';
 import Button from "react-bootstrap/Button";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import logo from "../images/logo.svg";
-import shine from "../images/shine.svg";
+import logo from "../../images/logo.svg";
+import shine from "../../images/shine.svg";
 
-export const Details = () => {
+export const Foods = () => {
 
     return (
         <>
