@@ -1,14 +1,14 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
 import { Home } from "./components/Home";
 import { NavBar } from "./components/Navbar";
 import { Register } from "./components/register/Register";
 import { Login } from "./components/Login";
 import { Dashboard } from "./components/dashboard/Dashboard";
-import { Foods } from "./components/Foods";
+import { Foods } from "./components/dashboard/Foods";
 import { Steps } from "./components/Steps";
-import { Details } from "./components/Details";
+import Details from "./components/dashboard/Details";
 
 
 function App() {

@@ -97,5 +97,19 @@ public class DaysController {
 		// Return the updated Tracker
 		return ResponseEntity.ok(save);
 	}
+		//http://localhost:8080/api/days/day/{{daysId}}
+	@GetMapping("/days/day/{id}")
+	public ResponseEntity<?> getDaysByDaysId(@PathVariable Integer id) {
+		
+		Optional<Days> day= daysRepo.findById(id);
+		
+		if(day.isEmpty()) {
+			return ResponseEntity.status(404).body("User not found");
+		}
+		else {
+			return ResponseEntity.status(200).body(day.get());
+		}
+	}
+	
 
 }

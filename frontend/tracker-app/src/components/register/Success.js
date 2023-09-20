@@ -44,7 +44,7 @@ const Success = () => {
         <img className="back-img" src={shine} alt="back logo" />
         <img className="center" src={logo} alt="home logo" />
       </div>
-      <h2><span>{user.firstName}</span>, your account has succesfully been created!</h2>
+      <h2><span>{user.fname}</span>, your account has succesfully been created!</h2>
       <h4><a href="/login">Log In</a> now to start your rise to a healthier lifestyle! <br /> We hope you enjoy using NutriLIFT! </h4>
     </div>
   )
