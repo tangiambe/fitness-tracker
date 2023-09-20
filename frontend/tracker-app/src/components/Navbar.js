@@ -28,7 +28,7 @@ export const NavBar = () => {
             <Navbar expand="lg" className="trivNavBar bg-body-tertiary" >
                 <Container>
                     <Navbar.Brand className="fw-bold">
-                        <Link to="/" className="nav-title">NutriLift</Link>
+                        <Link to="/" className="nav-title">NutriLIFT</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle id="offcanvasNavbarToggle" className="border border-0" aria-controls="offcanvasNavbar-expand-lg" />
                     <Navbar.Offcanvas id="offcanvasNavbar-expand-lg" aria-labelledby="offcanvasNavbarLabel-expand-lg" placement="end">
