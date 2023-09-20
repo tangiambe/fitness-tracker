@@ -11,6 +11,9 @@ import { Alert } from "react-bootstrap";
 import InputGroup from 'react-bootstrap/InputGroup'
 import UserApi from "../api/UserApi";
 import Cookies from 'js-cookie'; // Import the js-cookie library
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -63,10 +66,10 @@ export const Login = () => {
     }, [user, dispatch, navigate, auth])
 
     /* Password Visiblity */
-    // const [passwordShown, setPasswordShown] = useState(false);
-    // const togglePasswordVisiblity = () => { setPasswordShown(passwordShown ? false : true) };
-    // const showPwd = <FontAwesomeIcon icon={faEye} />;
-    // const hidePwd = <FontAwesomeIcon icon={faEyeSlash} />;
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePasswordVisiblity = () => { setPasswordShown(passwordShown ? false : true) };
+    const showPwd = <FontAwesomeIcon icon={faEye} />;
+    const hidePwd = <FontAwesomeIcon icon={faEyeSlash} />;
 
     return (
         <>
@@ -97,19 +100,17 @@ export const Login = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group className="mt-4 mb-4">
-                                    <Form.Label htmlFor="password">Password</Form.Label>
+                                    <Form.Label htmlFor="password">Password
+                                    <i onClick={togglePasswordVisiblity}>{passwordShown ? hidePwd : showPwd}</i>
+                                    </Form.Label>
                                     <InputGroup>
                                         <Form.Control
                                             required
-                                            type="password"
+                                            type={passwordShown ? "text" : "password"}
                                             id="password"
                                             name="password"
                                             placeholder="Password"
                                         />
-                                        {/* This Input Group handles the Password Visibility Toggle */}
-                                        {/* <InputGroup.Text >
-                                            <i onClick={togglePasswordVisiblity}>{passwordShown ? hidePwd : showPwd}</i>
-                                        </InputGroup.Text> */}
                                     </InputGroup>
                                 </Form.Group>
                                 <Button type="submit" className="login_btn">Login</Button>

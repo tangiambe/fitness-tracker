@@ -167,7 +167,7 @@ const StepOne = () => {
                 type="text"
                 ref={refUsername}
                 autoComplete="off"
-                placeholder="Enter a username"
+                placeholder="Enter a Username"
                 className={!validUsername(user.username) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, username: e.target.value })}
               />
@@ -186,7 +186,7 @@ const StepOne = () => {
               <div className="dflex">
                 <Form.Label>
                   Email Address
-                  <FontAwesomeIcon icon={faCheck} className={validEmail(user.email) ? "valid" : "hide"} />
+                  <FontAwesomeIcon icon={faCheck} className={validEmail(user.email) ? "valid-mail" : "hide"} />
                 </Form.Label>
                 {user.nextClick && (
                   <span>{user.email === "" ? "This field is required" :

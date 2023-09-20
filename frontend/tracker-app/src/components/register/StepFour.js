@@ -52,7 +52,7 @@ const StepFour = () => {
 
   return (
     <div className="Goal info">
-      <h2>Last thing, {user.fname}! What is your main goal?</h2>
+      <h2>Last thing, <span>{user.fname}</span>! What is your main goal?</h2>
       <p>Select an option that most closely fits your health and fitness goals!</p>
       <div className="goalsCrads">
         <div onClick={() => setGoal({ lose: true, maintain: false, gain: false, })}>
