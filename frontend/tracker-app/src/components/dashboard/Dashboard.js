@@ -22,7 +22,15 @@ function Dashboard() {
   const daysApiUrl = `http://localhost:8080/api/days/${userId}`;
 
   // Sample data for the card
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({
+      id: "-1",
+      firstName: "",
+      lastName: "",
+      dailyStepsGoal: "",
+      dailyCaloricGoal: "",
+  });
+    
+
   const [daysData, setDaysData] = useState([]);
   
   // Define selectedDate
@@ -42,6 +50,7 @@ function Dashboard() {
 
         // Handle the response data as needed
         setUserData(userResponse.data);
+        console.log(userData);
         setDaysData(daysResponse.data);
 
         // Use the findDayIdByDate function to find the matching day's ID for the selectedDate
@@ -79,12 +88,12 @@ function Dashboard() {
     return (
       <div fluid id="wrapper"> {/* Wrapper with margin */}
         <div>
-          <h3 className="center-align">{Cookies.get('fname')} {Cookies.get('lname')}'s Daily Tracker</h3>
+          <h3 className="center-align">{userData.firstName} {userData.lastName}'s Daily Tracker</h3>
           <h3 className="center-align"> <DateTimeDisplay /></h3><br/><br/>
           {/* Displaying the 'dailyCaloricGoal' property */}
-          <p className="center-align">Daily Caloric Goal:  {Cookies.get('dailyCaloricGoal')} calories</p>
+          <p className="center-align">Daily Caloric Goal:  {userData.dailyCaloricGoal} calories</p>
           {/* Displaying the 'dailyStepsGoal' property */}
-          <p className="center-align">Daily Steps Goal: {Cookies.get('dailyStepsGoal')} steps</p>
+          <p className="center-align">Daily Steps Goal: {userData.dailyStepsGoal} steps</p>
 
         </div>
         <div className="container-fluid">
