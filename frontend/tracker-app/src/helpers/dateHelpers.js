@@ -65,7 +65,7 @@ export  function findTotalDailyStepsByDate(daysData, currentDate) {
       const year = currentDate.getFullYear();
   
       const formattedDate = `${year}/${month}/${day}`;
-      console.log('FormattedDate:', formattedDate);
+     // console.log('FormattedDate:', formattedDate);
   
       // Find the day object where entryDate matches the formattedDate
       const matchingDay = daysData.find((day) => {
@@ -73,13 +73,13 @@ export  function findTotalDailyStepsByDate(daysData, currentDate) {
         const entryDateStr = day.entryDate
           .map((part) => String(part).padStart(2, '0')) // Add leading zeros
           .join('/'); // Join the parts with slashes
-        console.log('Entry Date String:', entryDateStr);
+      //  console.log('Entry Date String:', entryDateStr);
         return entryDateStr === formattedDate;
       });
   
       return matchingDay;
     } catch (error) {
-      console.error('Error formatting date:', error);
+   //   console.error('Error formatting date:', error);
       // Handle the error or return an appropriate value
     }
   
