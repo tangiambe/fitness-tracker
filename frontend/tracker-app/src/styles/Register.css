@@ -299,6 +299,12 @@ p {
   font-size: 13px;
 }
 
+.valid-mail {
+  color: limegreen;
+  margin-left: 190px;
+  font-size: 13px;
+}
+
 .valid-pass {
   color: limegreen;
   margin-left: 220px;

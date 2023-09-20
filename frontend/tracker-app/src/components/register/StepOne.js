@@ -186,7 +186,7 @@ const StepOne = () => {
               <div className="dflex">
                 <Form.Label>
                   Email Address
-                  <FontAwesomeIcon icon={faCheck} className={validEmail(user.email) ? "valid" : "hide"} />
+                  <FontAwesomeIcon icon={faCheck} className={validEmail(user.email) ? "valid-mail" : "hide"} />
                 </Form.Label>
                 {user.nextClick && (
                   <span>{user.email === "" ? "This field is required" :
