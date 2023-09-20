@@ -167,7 +167,7 @@ const StepOne = () => {
                 type="text"
                 ref={refUsername}
                 autoComplete="off"
-                placeholder="Enter a username"
+                placeholder="Enter a Username"
                 className={!validUsername(user.username) && user.nextClick ? "erorr" : ""}
                 onChange={e => setAcc({ ...account, username: e.target.value })}
               />
