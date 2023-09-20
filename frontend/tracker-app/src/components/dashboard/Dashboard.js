@@ -121,9 +121,10 @@ function Dashboard() {
                           <li className="list-group-item">{matchingDay ? matchingDay.totalDailySteps : '0'}</li>
                           <li className="list-group-item">Calories:</li>
                           <li className="list-group-item">{matchingDay ? Math.round(matchingDay.totalCaloriesConsumed) : '0'}</li>
-                          <li className="list-group-item"><a className="btn btn-primary" href="#" role="button">View Meals</a></li>
-                          <li className="list-group-item"><a className="btn btn-primary" href="#" role="button">Add Meals</a></li>
-                          <li className="list-group-item"><a className="btn btn-primary" href="#" role="button">Add Steps</a></li>
+                          <li className="list-group-item"><a className="btn btn-primary" href="/details" role="button">View Meals</a></li>
+                          <li className="list-group-item"><a className="btn btn-primary" href="/foods" role="button">Add Meals</a></li>
+                          <li className="list-group-item"><a className="btn btn-primary" href="/steps" role="button">Add Steps</a></li>
+                          
                         </ul>
                       }
                     />
