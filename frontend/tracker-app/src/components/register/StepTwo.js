@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Container from "react-bootstrap/esm/Container";
 import {faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -97,8 +98,9 @@ const StepTwo = () => {
   return (
     <div className="info">
       <h2>Hi {user.fname}! Just a little bit more about you.</h2>
-      {/* <p>All fields are required</p> */}
-      <div className="form">
+      <p>All fields are required</p>
+      <Container className="s2 dflex">
+      <div className="form ms-5 pt-2 ps-5">
         <Row>
           <Col>
             <div className="details dflex">
@@ -138,7 +140,7 @@ const StepTwo = () => {
 
                 <Form.Text id="uidnote" className={user.age && validAge(user.age) ? "offscreen" : "instructions"}>
                   <FontAwesomeIcon icon={faInfoCircle} />
-                  Must be 13 years or older.
+                  Must be 13 years or older
                 </Form.Text>
               </div>
             </div>
@@ -150,7 +152,7 @@ const StepTwo = () => {
         <Col>
             <div className="details">
               <div className="fields">
-                <div className="details dflex">
+                <div className="details dflex mt-5">
                 <Form.Label>
                 Height
               </Form.Label>
@@ -174,7 +176,7 @@ const StepTwo = () => {
           <Col>
             <div className="details">
               <div className="fields">
-                <div className="details dflex">
+                <div className="details dflex mt-5">
                 <Form.Label>
                 Weight
               </Form.Label>
@@ -196,6 +198,7 @@ const StepTwo = () => {
           </Col>
         </Row>
       </div>
+      </Container>
     </div>
   );
 };
