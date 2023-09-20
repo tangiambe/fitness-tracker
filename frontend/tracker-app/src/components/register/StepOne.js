@@ -215,7 +215,7 @@ const StepOne = () => {
                 <Form.Label htmlFor="password">
                   Password
                   <i onClick={togglePasswordVisiblity}>{passwordShown ? hidePwd : showPwd}</i>
-                  <FontAwesomeIcon icon={faCheck} className={validPwd(user.password) ? "valid" : "hide"} />
+                  <FontAwesomeIcon icon={faCheck} className={validPwd(user.password) ? "valid-pass" : "hide"} />
                 </Form.Label>
                 {user.nextClick && (
                   <span>{user.password === "" ? "This field is required" :

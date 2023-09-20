@@ -294,7 +294,13 @@ p {
 
 .valid {
   color: limegreen;
-  margin-left: 200px;
+  margin-left: 195px;
+  font-size: 13px;
+}
+
+.valid-pass {
+  color: limegreen;
+  margin-left: 220px;
   font-size: 13px;
 }
 
