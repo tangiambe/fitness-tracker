@@ -30,7 +30,7 @@ export const Home = () => {
                     {/* Text Row */}
                     <Row>
                         <Container className="home-page text-center">
-                            <h1>NutriLift</h1>
+                            <h1>NutriLIFT</h1>
                             <h3>Rise to a Healthier You!</h3>
                             <h4>Ready to Start your Journey?</h4>
                         </Container>
