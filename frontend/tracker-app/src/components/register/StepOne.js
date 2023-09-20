@@ -24,8 +24,8 @@ const StepOne = () => {
 
 
   const [account, setAcc] = useState({
-    fname: "",
-    lname: "",
+    firstName: "",
+    lastName: "",
     username: "",
     email: "",
     password: ""
@@ -74,21 +74,21 @@ const StepOne = () => {
   }
 
   useEffect(() => {
-    refFname.current.value = user.fname;
-    refLname.current.value = user.lname;
+    refFname.current.value = user.firstName;
+    refLname.current.value = user.lastName;
     refUsername.current.value = user.username;
     refEmail.current.value = user.email;
     refPwd.current.value = user.password;
 
-    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
+    dispatch(info({ ...user, firstName: refFname.current.value, lastName: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
     //eslint-disable-next-line
   }, [])
 
 
   useEffect(() => {
-    dispatch(info({ ...user, fname: refFname.current.value, lname: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
+    dispatch(info({ ...user, firstName: refFname.current.value, lastName: refLname.current.value, username: refUsername.current.value, email: refEmail.current.value, password: refPwd.current.value }));
     //eslint-disable-next-line
-  }, [account.fname, account.lname, account.username, account.email, account.password]);
+  }, [account.firstName, account.lastName, account.username, account.email, account.password]);
 
 
 
@@ -102,10 +102,10 @@ const StepOne = () => {
             <div className="fields">
               <div className="dflex">
                 <label>First Name</label>
-                <FontAwesomeIcon icon={faCheck} className={validName(user.fname) ? "valid" : "hide"} />
+                <FontAwesomeIcon icon={faCheck} className={validName(user.firstName) ? "valid" : "hide"} />
                 {user.nextClick && (
-                  <span>{user.fname === "" ? "This field is required" :
-                    !validName(user.fname) &&
+                  <span>{user.firstName === "" ? "This field is required" :
+                    !validName(user.firstName) &&
                     <FontAwesomeIcon icon={faTimes} className={"invalid"} />
                   }</span>
                 )}
@@ -116,8 +116,8 @@ const StepOne = () => {
                 ref={refFname}
                 autoComplete="off"
                 placeholder="Enter First Name"
-                className={!validName(user.fname) && user.nextClick ? "erorr" : ""}
-                onChange={e => setAcc({ ...account, fname: e.target.value })}
+                className={!validName(user.firstName) && user.nextClick ? "erorr" : ""}
+                onChange={e => setAcc({ ...account, firstName: e.target.value })}
               />
             </div>
           </Col>
@@ -125,10 +125,10 @@ const StepOne = () => {
             <div className="fields">
               <div className="dflex">
                 <label>Last Name</label>
-                <FontAwesomeIcon icon={faCheck} className={validName(user.lname) ? "valid" : "hide"} />
+                <FontAwesomeIcon icon={faCheck} className={validName(user.lastName) ? "valid" : "hide"} />
                 {user.nextClick && (
-                  <span>{user.lname === "" ? "This field is required" :
-                    !validName(user.lname) &&
+                  <span>{user.lastName === "" ? "This field is required" :
+                    !validName(user.lastName) &&
                     <FontAwesomeIcon icon={faTimes} className={"invalid"} />
                   }</span>
                 )}
@@ -139,8 +139,8 @@ const StepOne = () => {
                 ref={refLname}
                 autoComplete="off"
                 placeholder="Enter Last Name"
-                className={!validName(user.lname) && user.nextClick ? "erorr" : ""}
-                onChange={e => setAcc({ ...account, lname: e.target.value })}
+                className={!validName(user.lastName) && user.nextClick ? "erorr" : ""}
+                onChange={e => setAcc({ ...account, lastName: e.target.value })}
               />
             </div>
           </Col>

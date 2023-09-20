@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect} from 'react';
+import { useSelector } from "react-redux";
 import '../styles/Home.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -6,8 +7,12 @@ import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import logo from "../images/logo.svg";
 import shine from "../images/shine.svg";
+import { Link} from "react-router-dom";
 
 export const Home = () => {
+
+    const activeUser = useSelector((state) => state.user);
+    useEffect(() => { }, [activeUser])
 
     return (
         <>
@@ -30,8 +35,18 @@ export const Home = () => {
                             <h4>Ready to Start your Journey?</h4>
                         </Container>
                         <Container className="text-center">
-                            <Button href="/register" className="register-btn">Register</Button>
-                            <Button href="/login" className="login-btn">Login</Button>
+                        {activeUser._id !== "-1" ? (
+                                <>
+                                    <Button className="dash-btn1">
+                                        <Link to="/dashboard" className="dash-btn" >Dashboard</Link>
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Button href="/register" className="register-btn">Register</Button>
+                                    <Button href="/login" className="login-btn">Login</Button>
+                                </>
+                            )}
                         </Container>
                     </Row>
 

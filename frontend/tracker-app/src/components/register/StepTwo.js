@@ -96,7 +96,7 @@ const StepTwo = () => {
 
   return (
     <div className="info">
-      <h2>Hi {user.fname}! Just a little bit more about you.</h2>
+      <h2>Hi {user.firstName}! Just a little bit more about you.</h2>
       {/* <p>All fields are required</p> */}
       <div className="form">
         <Row>
