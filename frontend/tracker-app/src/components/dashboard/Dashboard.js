@@ -73,24 +73,27 @@ export const Dashboard = () => {
   return (
     <div fluid id="wrapper">
       <div>
-        <h3 className="center-align">
+        <h2 className="dash-page-text center-align pt-3">
           {userData.firstName} {userData.lastName}'s Daily Tracker
-        </h3>
-        <h3 className="center-align">
+        </h2>
+        {/* <hr /> */}
+        <h3 className="dash-page-text2 center-align pb-2">
           <DateTimeDisplay />
         </h3>
-        <br /><br />
-        <p className="center-align">
+        <hr className='line' /><hr className='line' />
+        <p className="dash-page-text3 center-align">
           {userData.goal?.dailyCaloricGoal !== undefined
             ? `Daily Caloric Goal: ${Math.round(userData.goal.dailyCaloricGoal)} calories`
             : 'Loading...'}
         </p>
-        <p className="center-align">
+        <p className="dash-page-text3 center-align">
           {userData.goal?.dailyStepsGoal !== undefined
             ? `Daily Steps Goal: ${userData.goal.dailyStepsGoal} steps`
             : 'Loading...'}
         </p>
+        <hr className='line' /><hr className='line' />
       </div>
+      {/* <br /><br /> */}
       <div className="container-fluid">
         {[...Array(2).keys()].map((rowIndex) => (
           <div className="row" key={`row-${rowIndex}`}>
@@ -164,6 +167,9 @@ export const Dashboard = () => {
           </div>
         ))}
       </div>
+      <br /><br />
+      <br /><br />
+      <br /><br />
     </div>
   );
 }

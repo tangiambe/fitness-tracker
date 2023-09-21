@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Col } from 'react-bootstrap';
 import { useSelector } from "react-redux";
+import '../../styles/Details.css';
 
 export const Details = () => {
   const activeUser = useSelector((state) => state.user);
@@ -14,7 +15,6 @@ export const Details = () => {
     }
   }, [activeUser, navigate]);
 
-  console.log(activeUser.firstName)
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -40,6 +40,9 @@ export const Details = () => {
     fetchData()
   }, [dayId, daysApiUrl]);
 
+
+  // console.log(daysData.entryDate[1] + '/' + daysData.entryDate[2] + '/' + daysData.entryDate[0])
+
   if (!daysData || !daysData.nutritions) {
     return <p>No nutrition data available.</p>;
   }
@@ -47,9 +50,13 @@ export const Details = () => {
   return (
     <Container fluid id="wrapper">
       <Col id="homePageCol">
-        <Container className="home-page text-center">
-          <h3>This is the list of meals you have added to this day!</h3>
-          <table className="table table-bordered">
+        <Container className="details-page text-center mt-5">
+        <hr/>
+        <hr/>
+          <h2>Meal Log</h2>
+          <h4>Date: {daysData.entryDate[1]} / {daysData.entryDate[2]} / {daysData.entryDate[0]}</h4>
+          {/* <hr className="pb-3"></hr> */}<hr/><hr className="pb-4"/>
+          <table className="table table-bordered pt-4">
             <thead>
               <tr>
                 <th>Name</th>
