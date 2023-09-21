@@ -106,7 +106,7 @@ export const Login = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group className="mt-4 mb-4">
-                                    <Form.Label htmlFor="password">Password
+                                    <Form.Label htmlFor="password">Password&nbsp;&nbsp;
                                     <i onClick={togglePasswordVisiblity}>{passwordShown ? hidePwd : showPwd}</i>
                                     </Form.Label>
                                     <InputGroup>
