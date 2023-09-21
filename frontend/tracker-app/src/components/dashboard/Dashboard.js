@@ -10,15 +10,18 @@ import Cookies from 'js-cookie';
 import { Container, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-function Dashboard() {
+export const Dashboard = () => {
   const activeUser = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (activeUser._id === "-1") {
+    if (activeUser.firstName === undefined) {
       navigate("/login");
     }
   }, [activeUser, navigate]);
+
+    
+    console.log(activeUser.firstName)
 
   const userId = Cookies.get('userId');
   const userApiUrl = `http://localhost:8080/api/user/${userId}`;
@@ -165,4 +168,3 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
