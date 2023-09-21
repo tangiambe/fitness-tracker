@@ -41,9 +41,8 @@ export const NavBar = () => {
                                  </Nav>
                              ) : (
                                  <Nav className="justify-content-end flex-grow-1 align-items-center">
-                                     <Nav.Item className="px-3 py-2">
-                                        {/* CHANGE STYLING OF DASHBOARD */}
-                                     <Link to="/dashboard" className="fw-bold">
+                                     <Nav.Item className=" px-3 py-2">
+                                     <Link to="/dashboard" className=" nav-link text-decoration-none">
                                             Dashboard
                                         </Link>
                                      </Nav.Item>
