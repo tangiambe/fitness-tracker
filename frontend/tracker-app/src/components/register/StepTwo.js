@@ -77,7 +77,7 @@ const StepTwo = () => {
   const AGE_REGEX = /^(?:1[01][0-9]|120|1[3-9]|[2-9][0-9])$/
   // const SEX_REGEX = /male/
   const HEIGHT_REGEX = /^(?:4[8-9]|[5-8][0-9])$/
-  const WEIGHT_REGEX = /^([1-6][0-9][0-9]|[7-9][0-9])$/
+  const WEIGHT_REGEX = /^(?:[1-6][0-9][0-9]|[7-9][0-9])$/
 
   // const checked = e => {
   //   return SEX_REGEX.test(e);
@@ -97,13 +97,10 @@ const StepTwo = () => {
 
   return (
     <div className="info">
-      <h2>Hi {user.firstName}! Just a little bit more about you.</h2>
-      {/* <p>All fields are required</p> */}
-      <div className="form">
-      <h2>Hi <span>{user.fname}</span>, tell us a little bit more about you!</h2>
-      <p>All fields are required.</p>
-      <Container className="dflex">
-      <div className="form pt-2 ps-5">
+      <h2>Hi {user.fname}! Just a little bit more about you.</h2>
+      <p>All fields are required</p>
+      <Container className="s2 dflex">
+      <div className="form ms-5 pt-2 ps-5">
         <Row>
           <Col>
             <div className="details dflex">
@@ -123,7 +120,7 @@ const StepTwo = () => {
           </Col>
           <Col>
             <div className="details">
-              <div className="fields ps-3">
+              <div className="fields">
                 <div className="details dflex">
                 <Form.Label>
                 Age
@@ -178,7 +175,7 @@ const StepTwo = () => {
           </Col>
           <Col>
             <div className="details">
-              <div className="fields ms-2 ps-1">
+              <div className="fields">
                 <div className="details dflex mt-5">
                 <Form.Label>
                 Weight
