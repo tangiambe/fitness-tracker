@@ -22,13 +22,23 @@
     color: #fff
 }
 
+.submit-btn {
+    color: #fff;
+    padding: 8px 22px 7px;
+    border: 2px solid #FF914D;
+    background-color: #2b58763b;
+    margin-right: 4%;
+    border-radius: 25px; 
+    font-size: 25px;
+    font-weight: 500;
+}
+
 .back-btn {
     color: #fff;
     padding: 8px 22px 7px;
-    border: 1px solid #FF914D;
+    border: 2px solid #FF914D;
     background-color: #2b58763b;
-    margin-right: 4%;
-    margin-top: 90%;
+    margin-top: 10%;
     border-radius: 25px; 
     font-size: 25px;
     font-weight: 700;
