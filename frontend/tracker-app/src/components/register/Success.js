@@ -10,8 +10,8 @@ const Success = () => {
     // Create the request body
     const requestBody = {
       email: user.email,
-      firstName: user.firstName, // Note the property name correction
-      lastName: user.lastName, // Note the property name correction
+      firstName: user.fname, // Note the property name correction
+      lastName: user.lname, // Note the property name correction
       userName: user.username,
       password: user.password,
       activityType: user.level, // Assuming 'level' is a property in your user object
