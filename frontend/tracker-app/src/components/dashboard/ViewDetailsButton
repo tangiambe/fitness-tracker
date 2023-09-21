@@ -19,4 +19,6 @@ function ViewDetailsButton({ nutrition }) {
   );
 }
 
+
+
 export default ViewDetailsButton;
