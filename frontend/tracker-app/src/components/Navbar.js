@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav'
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "../styles/Navbar.css"
 
 
 export const NavBar = () => {
+
+    const activeUser = useSelector((state) => state.user);
+    useEffect(() => { }, [activeUser.firstName])
 
     return (
         <>
@@ -22,18 +26,34 @@ export const NavBar = () => {
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg" className="fw-bold">Menu</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                                <Nav className="justify-content-end flex-grow-1 align-items-center">
-                                    <Nav.Item className=" nav-link px-3 py-2">
-                                        <Nav.Link href="/register" className="fw-bold">
+                        {activeUser.firstName === undefined ? (
+                                 <Nav className="justify-content-end flex-grow-1 align-items-center">
+                                     <Nav.Item className=" nav-link px-3 py-2">
+                                         <Nav.Link href="/register" className="fw-bold">
                                             Register
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className="nav-link px-3 py-2">
                                         <Nav.Link href="/login" className="fw-bold">
                                             Login
+                                         </Nav.Link>
+                                     </Nav.Item>
+                                 </Nav>
+                             ) : (
+                                 <Nav className="justify-content-end flex-grow-1 align-items-center">
+                                     <Nav.Item className="px-3 py-2">
+                                        {/* CHANGE STYLING OF DASHBOARD */}
+                                     <Link to="/dashboard" className="fw-bold">
+                                            Dashboard
+                                        </Link>
+                                     </Nav.Item>
+                                     <Nav.Item className="px-3 py-2">
+                                     <Nav.Link href="/" className="fw-bold">
+                                            Logout
                                         </Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
+                                     </Nav.Item>
+                                 </Nav>
+                             )}
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>
