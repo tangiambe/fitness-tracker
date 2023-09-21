@@ -17,10 +17,26 @@
     justify-content: center;
 }
 
-.home-page {
+.details-page {
     text-align: center;
     color: #fff
 }
+
+.details-page hr {
+    text-align: center;
+    color: #fff;
+    /* padding-bottom: 3%; */
+}
+
+.details-page h2 {
+    font-size: 50px;
+}
+
+.details-page h4 {
+    font-size: 20px;
+    color: #FF914D;
+}
+
 
 .submit-btn {
     color: #fff;
