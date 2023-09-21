@@ -5,10 +5,10 @@ import { Home } from "./components/Home";
 import { NavBar } from "./components/Navbar";
 import { Register } from "./components/register/Register";
 import { Login } from "./components/Login";
-import { Dashboard } from "./components/dashboard/Dashboard";
+import { Dashboard }  from "./components/dashboard/Dashboard";
 import { Foods } from "./components/dashboard/Foods";
-import { Steps } from "./components/Steps";
-import Details from "./components/dashboard/Details";
+import { Details } from "./components/dashboard/Details";
+import { Steps } from "./components/dashboard/Steps";
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
-          <Route path="/meals" element={<Foods />} />
+          <Route path="/foods" element={<Foods />} />
           <Route path="/steps" element={<Steps />} />
           <Route path="/details" element={<Details />} />
 

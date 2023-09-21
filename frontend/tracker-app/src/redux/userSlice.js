@@ -18,7 +18,6 @@ export const userSlice = createSlice({
       timezone: timeZone,
       level:"",
       goal:"",
-      // nextPermutation: false,
       nextClick: false
     },
   },

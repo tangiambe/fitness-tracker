@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Container from "react-bootstrap/esm/Container";
 import {faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -76,7 +77,7 @@ const StepTwo = () => {
   const AGE_REGEX = /^(?:1[01][0-9]|120|1[3-9]|[2-9][0-9])$/
   // const SEX_REGEX = /male/
   const HEIGHT_REGEX = /^(?:4[8-9]|[5-8][0-9])$/
-  const WEIGHT_REGEX = /^(?:[1-6][0-9][0-9]|[7-9][0-9])$/
+  const WEIGHT_REGEX = /^([1-6][0-9][0-9]|[7-9][0-9])$/
 
   // const checked = e => {
   //   return SEX_REGEX.test(e);
@@ -96,9 +97,10 @@ const StepTwo = () => {
 
   return (
     <div className="info">
-      <h2>Hi {user.fname}! Just a little bit more about you.</h2>
-      {/* <p>All fields are required</p> */}
-      <div className="form">
+      <h2>Hi <span>{user.fname}</span>, tell us a little bit more about you!</h2>
+      <p>All fields are required.</p>
+      <Container className="dflex">
+      <div className="form pt-2 ps-5">
         <Row>
           <Col>
             <div className="details dflex">
@@ -118,7 +120,7 @@ const StepTwo = () => {
           </Col>
           <Col>
             <div className="details">
-              <div className="fields">
+              <div className="fields ps-3">
                 <div className="details dflex">
                 <Form.Label>
                 Age
@@ -138,7 +140,7 @@ const StepTwo = () => {
 
                 <Form.Text id="uidnote" className={user.age && validAge(user.age) ? "offscreen" : "instructions"}>
                   <FontAwesomeIcon icon={faInfoCircle} />
-                  Must be 13 years or older.
+                  Must be 13 years or older
                 </Form.Text>
               </div>
             </div>
@@ -150,7 +152,7 @@ const StepTwo = () => {
         <Col>
             <div className="details">
               <div className="fields">
-                <div className="details dflex">
+                <div className="details dflex mt-5">
                 <Form.Label>
                 Height
               </Form.Label>
@@ -173,8 +175,8 @@ const StepTwo = () => {
           </Col>
           <Col>
             <div className="details">
-              <div className="fields">
-                <div className="details dflex">
+              <div className="fields ms-2 ps-1">
+                <div className="details dflex mt-5">
                 <Form.Label>
                 Weight
               </Form.Label>
@@ -196,6 +198,7 @@ const StepTwo = () => {
           </Col>
         </Row>
       </div>
+      </Container>
     </div>
   );
 };

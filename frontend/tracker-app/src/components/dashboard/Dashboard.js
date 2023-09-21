@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 import '../../styles/Dashboard.css';
 import BootstrapCard from '../dashboard/BootstrapCard';
 import DateTimeDisplay from './DateTimeDisplay';
-import { findDayByDate, findNutritionByDate } from '../../helpers/dateHelpers';
-
-import Cookies from 'js-cookie';
+import { findDayByDate } from '../../helpers/dateHelpers';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { Container, Col, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-function Dashboard(props) {
+export const Dashboard = () => {
+  const activeUser = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (activeUser.firstName === undefined) {
+      navigate("/login");
+    }
+  }, [activeUser, navigate]);
+
+    
+    console.log(activeUser.firstName)
+
   const userId = Cookies.get('userId');
   const userApiUrl = `http://localhost:8080/api/user/${userId}`;
   const daysApiUrl = `http://localhost:8080/api/days/${userId}`;
-  
+
   const [userData, setUserData] = useState({
     id: "-1",
     firstName: "",
@@ -21,13 +35,8 @@ function Dashboard(props) {
     dailyCaloricGoal: 0,
   });
 
-  const [nutrition, setNutrition] = useState({
-    id: "-1",
-    entryDate: "",
-  });
-
   const [daysData, setDaysData] = useState([]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -72,8 +81,8 @@ function Dashboard(props) {
         </h3>
         <br /><br />
         <p className="center-align">
-          {userData.goal?.dailyCaloricGoal !== undefined 
-            ?  `Daily Caloric Goal: ${Math.round(userData.goal.dailyCaloricGoal)} calories`
+          {userData.goal?.dailyCaloricGoal !== undefined
+            ? `Daily Caloric Goal: ${Math.round(userData.goal.dailyCaloricGoal)} calories`
             : 'Loading...'}
         </p>
         <p className="center-align">
@@ -91,7 +100,6 @@ function Dashboard(props) {
               );
               const matchingCardDate = subtractDays(rowIndex * 7 + index);
               const matchingDay = findDayByDate(daysData, matchingCardDate);
-             // console.log(matchingDay);
               const matchingDayId = matchingDay ? matchingDay.id : 0;
               return (
                 <div key={index} className="col custom-col">
@@ -110,19 +118,28 @@ function Dashboard(props) {
                             : '0'}
                         </li>
                         <li className="list-group-item">
-                          {matchingDay && (
-                            <Link
-                               to={`/details?dayId=${matchingDayId}`}
-                                  className="btn btn-primary"
-                                  role="button"
-                                >
-                                  View Meals
+                        {matchingDay && matchingDay.totalCaloriesConsumed !== 0 ? (
+                          <Link
+                            to={`/details?dayId=${matchingDayId}`}
+                            className="btn btn-primary "
+                            role="button"
+                          >
+                            View Meals
                           </Link>
-                          )}
+                        ) : (
+                          <button
+                            type="button"
+                            className="btn btn-secondary invisible-button "
+                            disabled
+                            style={{ color: "transparent" }}
+                          >
+                            View Meals
+                          </button>
+                        )}
                         </li>
                         <li className="list-group-item">
                           <a
-                            className="btn btn-primary"
+                            className="btn btn-primary "
                             href="/foods"
                             role="button"
                           >
@@ -151,4 +168,3 @@ function Dashboard(props) {
   );
 }
 
-export {Dashboard};
