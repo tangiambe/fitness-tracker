@@ -290,5 +290,22 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 	
+public  String toJson() {
+		
+		return "{\"id\" : " + id
+				+ ", \"firstName\" : \"" + firstName + "\""
+				+ ", \"lastName\" : \"" + lastName + "\""
+				+ ", \"email\" : \"" + email + "\"" 
+				+ ", \"userName\" : \"" + userName + "\""
+				+ ", \"password\" : \"" + password + "\""
+				+ ", \"sex\" : \"" + sex
+				+ ", \"age\" : \"" + age + "\""
+				+ ", \"trackType\" : \"" + trackType + "\""
+				+ ", \"height\" : \"" + height +
+				", \"weight\" : \"" + weight + "\""
+				+ ", \"activeType\" : \"" + activityType + "\""
+				+ ", \"timeZone\" : \"" + timeZone +"\"}";
+		
+	}
 
 }
