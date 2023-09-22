@@ -1,3 +1,5 @@
+import DateTimeDisplay from '../components/dashboard/DateTimeDisplay';
+
 export function findTotalCaloriesConsumedByDate(daysData, currentDate) {
     // Format the currentDate to match the entryDate format
     const formattedDate = currentDate.toLocaleDateString('en-US', {
@@ -133,6 +135,26 @@ export  function findTotalDailyStepsByDate(daysData, currentDate) {
     }
   
     return null; // Return null if no matching day is found
+  }
+
+  export function formatDateToYYYYMMDD(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  export function formatDateAsMMMDD(dateString) {
+    const date = new Date(dateString);
+    const monthNames = [
+      'Jan', 'Feb', 'Mar', 'Apr',
+      'May', 'Jun', 'Jul', 'Aug',
+      'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    const month = monthNames[date.getMonth()];
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${month} ${day}`;
   }
   
   

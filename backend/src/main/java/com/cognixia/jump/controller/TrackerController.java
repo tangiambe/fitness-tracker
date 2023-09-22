@@ -73,7 +73,7 @@ public class TrackerController {
         String food= nutritionRequestDTO.getFood();
         System.out.println("Food: "+ food + " entryDate: " + entryDate);
         
-        Optional<Nutrition> nutrition = apiService.parseAPI(food);
+        List<Nutrition> nutrition = apiService.parseAPI(food);
         
 		if(nutrition.isEmpty()) {
 			return ResponseEntity.status(404).body("Food not found");

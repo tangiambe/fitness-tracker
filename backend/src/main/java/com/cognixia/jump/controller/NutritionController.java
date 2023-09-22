@@ -1,5 +1,6 @@
 package com.cognixia.jump.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,12 @@ public class NutritionController {
 	@GetMapping("/nutrition/{query}")
 	public ResponseEntity<?> getNutritionByUserId(@PathVariable String query) {
 
-		Optional<Nutrition> nutrition = service.parseAPI(query);
+		List<Nutrition> nutrition = service.parseAPI(query);
 		if(nutrition.isEmpty()) {
 			return ResponseEntity.status(404).body("Food not found");
 		}
 		else {
-			return ResponseEntity.status(200).body(nutrition.get());
+			return ResponseEntity.status(200).body(nutrition.get(0));
 		}
 	}
 }
