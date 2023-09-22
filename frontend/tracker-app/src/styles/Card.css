@@ -1,0 +1,150 @@
+@media (max-width: 768px) {
+  .card-dashboard {
+    box-shadow: 10px 20px rgb(23, 67, 111), 10px 20px;
+  }
+}
+@media (max-width: 768px) {
+  .card-dashboard {
+    box-shadow: 10px 20px rgb(23, 67, 111), 10px 20px;
+  }
+}
+
+.btn-group > .btn-group:not(:first-child) > .btn, .btn-group > .btn:not(:first-child) {
+  background: #56c6c6;
+  border-radius: 20px;
+  font-size: inherit;
+  color: #fff;
+  box-shadow: none;
+  border: none;
+  text-shadow: none;
+  padding: .5rem 1rem;
+  transition: background-color 0.25s;
+  font-size: inherit;
+}
+
+.btn-group > .btn-group:not(:last-child) > .btn, .btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+  background: #56c6c6;
+  border-radius: 20px;
+  font-size: inherit;
+  color: #fff;
+  box-shadow: none;
+  border: none;
+  text-shadow: none;
+  padding: .5rem 1rem;
+  transition: background-color 0.25s;
+  font-size: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid #FF4B2B;
+  background-color: #FF4B2B;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid #FF4B2B;
+  background-color: #FF4B2B;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+.card-dashboard {
+  width: 15%;
+  max-width: 200px;
+  height: 350px; /* Default height for larger screens */
+  z-index: 2;
+  margin-right: 10px;
+  margin-left: 15px;
+  margin-top:50px;
+  margin-bottom:50px;
+  background: 
+    linear-gradient(0deg, #2a4f62 16%, white 58%), 
+    linear-gradient(2deg, black, white), 
+    linear-gradient(0deg, black, white), var(--bs-info-text-emphasis);
+  padding: 10px;
+  border-radius: 20px;
+  border: 5px solid #080c29;
+  box-shadow: 10px 10px rgb(23, 67, 111), 10px 10px;
+}
+
+@media (max-width: 768px) {
+  .card-dashboard {
+    height: auto; /* Change to auto for smaller screens to adjust height based on content */
+
+  }
+}
+
+.card-body {
+  width: 100%;
+  height: 80%;
+  padding: 5px;
+  margin: 0px;
+  background-color: rgba(255, 255, 255, 0.5); 
+  z-index: 1;
+}
+
+.card-header1 {
+  margin-top: 5px;
+  color: #FF914D;
+}
+
+.card-button {
+  margin: 5px;
+  margin-left: 7px;
+  background: var(--bs-emphasis-color);
+  font-size: 12px;
+  text-transform: uppercase;
+}

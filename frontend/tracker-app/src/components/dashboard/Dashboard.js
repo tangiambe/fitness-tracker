@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import '../../styles/Dashboard.css';
 import BootstrapCard from '../dashboard/BootstrapCard';
 import DateTimeDisplay from './DateTimeDisplay';
-import { findDayByDate, formatDateAsMMMDD  } from '../../helpers/dateHelpers';
+import { findDayByDate, formatDateAsMMMDD } from '../../helpers/dateHelpers';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
@@ -20,9 +20,6 @@ export const Dashboard = () => {
       navigate("/login");
     }
   }, [activeUser, navigate]);
-
-    
-    console.log(activeUser.firstName)
 
   const userApiUrl = `http://localhost:8080/api/user/${userId}`;
   const daysApiUrl = `http://localhost:8080/api/days/${userId}`;
@@ -62,20 +59,38 @@ export const Dashboard = () => {
     return newDate;
   }
 
+  // Create an array of dates for the last 14 days
+  const last14Days = Array.from({ length: 14 }, (_, index) =>
+    subtractDays(index)
+  );
+
+  // Filter and sort the daysData array based on the last14Days
+  const filteredAndSortedDays = daysData
+    .filter((day) =>
+      last14Days.some(
+        (date) =>
+          formatDateAsMMMDD(new Date(day.entryDate)) ===
+          formatDateAsMMMDD(date)
+      )
+    )
+    .sort((a, b) => new Date(b.entryDate) - new Date(a.entryDate));
+
   return (
-    <div fluid id="wrapper">
+    <div id="wrapper" className="container-fluid">
       <div>
         <h2 className="dash-page-text center-align pt-3">
           {userData.firstName} {userData.lastName}'s Daily Tracker
         </h2>
-        {/* <hr /> */}
         <h3 className="dash-page-text2 center-align pb-2">
           <DateTimeDisplay />
         </h3>
-        <hr className='line' /><hr className='line' />
+        <hr className="line" />
+        <hr className="line" />
         <p className="dash-page-text3 center-align">
           {userData.goal?.dailyCaloricGoal !== undefined
-            ? `Daily Caloric Goal: ${Math.round(userData.goal.dailyCaloricGoal)} calories`
+            ? `Daily Caloric Goal: ${Math.round(
+                userData.goal.dailyCaloricGoal
+              )} calories`
             : 'Loading...'}
         </p>
         <p className="dash-page-text3 center-align">
@@ -83,85 +98,77 @@ export const Dashboard = () => {
             ? `Daily Steps Goal: ${userData.goal.dailyStepsGoal} steps`
             : 'Loading...'}
         </p>
-        <hr className='line' /><hr className='line' />
+        <hr className="line" />
+        <hr className="line" />
       </div>
-      {/* <br /><br /> */}
       <div className="container-fluid">
-        {[...Array(2).keys()].map((rowIndex) => (
-          <div className="row" key={`row-${rowIndex}`}>
-            {[...Array(7).keys()].map((index) => {
-              const displayCardDate = formatDateAsMMMDD(
-                subtractDays(rowIndex * 7 + index)
-              );
-              const matchingCardDate = subtractDays(rowIndex * 7 + index);
-              const matchingDay = findDayByDate(daysData, matchingCardDate);
-              const matchingDayId = matchingDay ? matchingDay.id : 0;
-              return (
-                <div key={index} className="col custom-col">
-                  <BootstrapCard
-                    title={formatDateAsMMMDD(displayCardDate)}
-                    content={
-                      <ul className="list-group list-group-flush">
-                        <li className="list-group-item">Steps</li>
-                        <li className="list-group-item">
-                          {matchingDay ? matchingDay.totalDailySteps : '0'}
-                        </li>
-                        <li className="list-group-item">Calories:</li>
-                        <li className="list-group-item">
-                          {matchingDay
-                            ? Math.round(matchingDay.totalCaloriesConsumed)
-                            : '0'}
-                        </li>
-                        <li className="list-group-item">
-                          {matchingDay && matchingDay.totalCaloriesConsumed !== 0 ? (
-                            <Link
-                              to={`/details?dayId=${matchingDayId}`}
-                              className="btn btn-primary"
-                              role="button"
-                            >
-                              View Meals
-                            </Link>
-                          ) : (
-                            <button
-                              type="button"
-                              className="btn btn-secondary invisible-button"
-                              disabled
-                              style={{ color: "transparent" }}
-                            >
-                              View Meals
-                            </button>
-                          )}
-                        </li>
-                        <li className="list-group-item">
-                          <Link
-                            to={`/foods?entryDate=${matchingCardDate}`}
-                            className="btn btn-primary"
-                            role="button"
-                          >
-                            Add Meals
-                          </Link>
-                        </li>
-                        <li className="list-group-item">
-                          <Link
-                            to={`/steps?dayId=${matchingDayId}`}
-                            className="btn btn-primary"
-                            role="button"
-                          >
-                            Add Steps
-                          </Link>
-                        </li>
-                      </ul>
-                    }
-                  />
+      <div className="row">
+  {last14Days.map((date, dayIndex) => {
+    const matchingDay = filteredAndSortedDays.find(
+      (day) => formatDateAsMMMDD(day.entryDate) === formatDateAsMMMDD(date)
+    );
+
+    return (
+      <div
+        key={`day-${dayIndex}`}
+        className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+      >
+        <BootstrapCard
+          title={formatDateAsMMMDD(date)}
+          content={
+            <div>
+              {matchingDay ? (
+                <div>
+                  <h6 className="mb-2 text-muted"> Steps: {matchingDay.totalDailySteps}</h6>
+                  <h6 className="mb-2 text-muted"> Calories: {Math.round(matchingDay.totalCaloriesConsumed)}</h6>
+                  <Link
+                    to={`/details?dayId=${matchingDay.id}`}
+                    className="btn btn-primary card-button"
+                    role="button"
+                  >
+                    View Meals
+                  </Link>
                 </div>
-              );
-            })}
-          </div>
-        ))}
+              ) : (
+                <div>
+                  <h6 className="mb-2 text-muted"> Steps: 0</h6>
+                  <h6 className="mb-2 text-muted"> Calories: 0</h6>
+                  <button
+                    type="button"
+                    className="btn btn-secondary card-button btn-sm"
+                    disabled
+                  >
+                    View Meals
+                  </button>
+                </div>
+              )}
+              <div>
+                <Link
+                  to={`/foods?entryDate=${date}`}
+                  className="btn btn-primary card-button"
+                  role="button"
+                >
+                  Add Meals
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to={`/steps?entryDate=${date}`}
+                  className="btn btn-primary card-button"
+                  role="button"
+                >
+                  Add Steps
+                </Link>
+              </div>
+            </div>
+          }
+        />
       </div>
-      <br /><br />
-      <br /><br />
-      <br /><br />
+    );
+  })}
+</div>
+
+      </div>
     </div>
   );
-          }  
+};

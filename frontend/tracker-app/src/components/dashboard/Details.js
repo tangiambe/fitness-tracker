@@ -62,7 +62,8 @@ export const Details = () => {
           <h2>Meal Log</h2>
           <h4>Date: {daysData.entryDate[1]} / {daysData.entryDate[2]} / {daysData.entryDate[0]}</h4>
           {/* <hr className="pb-3"></hr> */}<hr/><hr className="pb-4"/>
-          <table className="table table-bordered pt-4">
+          <table className="custom-table">
+            {/* Table header */}
             <thead>
               <tr>
                 <th>Name</th>
@@ -85,7 +86,7 @@ export const Details = () => {
             <tbody>
               {daysData.nutritions.map((nutrition) => (
                 <tr key={nutrition.id}>
-                  <td>{nutrition.name}</td>
+                  <td className="name">{nutrition.name}</td>
                   <td>{nutrition.foodCalories}</td>
                   <td>{nutrition.serving_size_g}</td>
                   <td>{nutrition.fat_total_g}</td>
