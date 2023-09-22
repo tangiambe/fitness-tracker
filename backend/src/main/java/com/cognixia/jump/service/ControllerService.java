@@ -113,8 +113,7 @@ public class ControllerService {
 	}
 
 	@Transactional
-	public Days addFood(Tracker tracker, Nutrition nutrition, LocalDate entryDate) {
-		Integer quantity = 1;
+	public Days addFood(Tracker tracker, Nutrition nutrition, LocalDate entryDate, int quantity) {
 		Days day;
 		List<Days> days = tracker.getDays();
 
@@ -326,4 +325,9 @@ public class ControllerService {
 
 		return user.get();
 	}
+	
+	public void updateTotalDailySteps(Integer dayId, Double steps) {
+	    daysRepo.updateTotalDailySteps(dayId, steps);
+	}
+
 }

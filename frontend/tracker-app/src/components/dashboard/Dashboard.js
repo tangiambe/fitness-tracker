@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import '../../styles/Dashboard.css';
 import BootstrapCard from '../dashboard/BootstrapCard';
 import DateTimeDisplay from './DateTimeDisplay';
-import { findDayByDate } from '../../helpers/dateHelpers';
+import { findDayByDate, formatDateAsMMMDD  } from '../../helpers/dateHelpers';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
@@ -13,9 +13,10 @@ import { useNavigate } from 'react-router-dom';
 export const Dashboard = () => {
   const activeUser = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const userId = Cookies.get('userId');
 
   useEffect(() => {
-    if (activeUser.firstName === undefined) {
+    if ((activeUser.firstName === undefined) && (userId === -1)) {
       navigate("/login");
     }
   }, [activeUser, navigate]);
@@ -23,7 +24,6 @@ export const Dashboard = () => {
     
     console.log(activeUser.firstName)
 
-  const userId = Cookies.get('userId');
   const userApiUrl = `http://localhost:8080/api/user/${userId}`;
   const daysApiUrl = `http://localhost:8080/api/days/${userId}`;
 
@@ -60,14 +60,6 @@ export const Dashboard = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(currentDate.getDate() - daysToSubtract);
     return newDate;
-  }
-
-  function formatDateAsMMMDD(inputDate) {
-    const formattedDate = inputDate.toLocaleString('default', {
-      month: 'short',
-      day: 'numeric',
-    });
-    return formattedDate;
   }
 
   return (
@@ -118,42 +110,42 @@ export const Dashboard = () => {
                             : '0'}
                         </li>
                         <li className="list-group-item">
-                        {matchingDay && matchingDay.totalCaloriesConsumed !== 0 ? (
-                          <Link
-                            to={`/details?dayId=${matchingDayId}`}
-                            className="btn btn-primary "
-                            role="button"
-                          >
-                            View Meals
-                          </Link>
-                        ) : (
-                          <button
-                            type="button"
-                            className="btn btn-secondary invisible-button "
-                            disabled
-                            style={{ color: "transparent" }}
-                          >
-                            View Meals
-                          </button>
-                        )}
+                          {matchingDay && matchingDay.totalCaloriesConsumed !== 0 ? (
+                            <Link
+                              to={`/details?dayId=${matchingDayId}`}
+                              className="btn btn-primary"
+                              role="button"
+                            >
+                              View Meals
+                            </Link>
+                          ) : (
+                            <button
+                              type="button"
+                              className="btn btn-secondary invisible-button"
+                              disabled
+                              style={{ color: "transparent" }}
+                            >
+                              View Meals
+                            </button>
+                          )}
                         </li>
                         <li className="list-group-item">
-                          <a
-                            className="btn btn-primary "
-                            href="/foods"
+                          <Link
+                            to={`/foods?entryDate=${matchingCardDate}`}
+                            className="btn btn-primary"
                             role="button"
                           >
                             Add Meals
-                          </a>
+                          </Link>
                         </li>
                         <li className="list-group-item">
-                          <a
+                          <Link
+                            to={`/steps?dayId=${matchingDayId}`}
                             className="btn btn-primary"
-                            href="/steps"
                             role="button"
                           >
                             Add Steps
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     }
@@ -166,5 +158,4 @@ export const Dashboard = () => {
       </div>
     </div>
   );
-}
-
+          }  

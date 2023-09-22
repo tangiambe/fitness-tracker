@@ -75,7 +75,7 @@ class RandomFoodGenerator {
             float servingSize = 100.0f; // Fixed serving size for simplicity
 
             // Add the food to the tracker for the specified day
-            controllerService.addFood(tracker, nutrition, entryDate);        }
+            controllerService.addFood(tracker, nutrition, entryDate, 1);        }
     }
 
     // Method to generate random food items (for demonstration purposes)
