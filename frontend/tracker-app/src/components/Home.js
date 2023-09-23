@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
     const activeUser = useSelector((state) => state.user);
-     useEffect(() => { }, [activeUser])
+    useEffect(() => { }, [activeUser])
 
     return (
         <>
@@ -34,18 +34,18 @@ export const Home = () => {
                             <h4>Ready to Start your Journey?</h4>
                         </Container>
                         <Container className="text-center">
-                        {activeUser.firstName !== undefined ? (
-                                 <>
-                                     <Button className="dash-btn1">
-                                         <Link to="/dashboard" className="dash-btn" >Dashboard</Link>
-                                     </Button>
-                                 </>
-                             ) : (
-                                 <>
-                                     <Button href="/register" className="register-btn">Register</Button>
-                                     <Button href="/login" className="login-btn">Login</Button>
-                                 </>
-                             )}
+                            {activeUser.firstName !== undefined ? (
+                                <>
+                                    <Button className="dash-btn1">
+                                        <Link to="/dashboard" className="dash-btn" >Dashboard</Link>
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Button href="/register" className="register-btn">Register</Button>
+                                    <Button href="/login" className="login-btn">Login</Button>
+                                </>
+                            )}
                         </Container>
                     </Row>
                 </Col>

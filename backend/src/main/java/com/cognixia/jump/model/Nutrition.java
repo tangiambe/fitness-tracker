@@ -44,7 +44,7 @@ public class Nutrition implements Serializable {
 	
     @ManyToOne
     @JoinColumn(name = "day_id")
-    @JsonBackReference // Use this annotation to prevent serialization loop
+    @JsonBackReference //Prevents serialization loop
     private Days day;
 	
 	public Nutrition() {}

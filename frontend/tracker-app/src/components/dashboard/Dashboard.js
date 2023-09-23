@@ -3,11 +3,10 @@ import { useSelector } from "react-redux";
 import '../../styles/Dashboard.css';
 import BootstrapCard from '../dashboard/BootstrapCard';
 import DateTimeDisplay from './DateTimeDisplay';
-import { findDayByDate, formatDateAsMMMDD } from '../../helpers/dateHelpers';
+import { formatDateAsMMMDD } from '../../helpers/dateHelpers';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { Container, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 export const Dashboard = () => {
@@ -89,8 +88,8 @@ export const Dashboard = () => {
         <p className="dash-page-text3 center-align">
           {userData.goal?.dailyCaloricGoal !== undefined
             ? `Daily Caloric Goal: ${Math.round(
-                userData.goal.dailyCaloricGoal
-              )} calories`
+              userData.goal.dailyCaloricGoal
+            )} calories`
             : 'Loading...'}
         </p>
         <p className="dash-page-text3 center-align">
@@ -102,72 +101,71 @@ export const Dashboard = () => {
         <hr className="line" />
       </div>
       <div className="container-fluid">
-      <div className="row">
-  {last14Days.map((date, dayIndex) => {
-    const matchingDay = filteredAndSortedDays.find(
-      (day) => formatDateAsMMMDD(day.entryDate) === formatDateAsMMMDD(date)
-    );
+        <div className="row">
+          {last14Days.map((date, dayIndex) => {
+            const matchingDay = filteredAndSortedDays.find(
+              (day) => formatDateAsMMMDD(day.entryDate) === formatDateAsMMMDD(date)
+            );
 
-    return (
-      <div
-        key={`day-${dayIndex}`}
-        className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
-      >
-        <BootstrapCard
-          title={formatDateAsMMMDD(date)}
-          content={
-            <div>
-              {matchingDay ? (
-                <div>
-                  <h6 className="mb-2 text-muted"> Steps: {matchingDay.totalDailySteps}</h6>
-                  <h6 className="mb-2 text-muted"> Calories: {Math.round(matchingDay.totalCaloriesConsumed)}</h6>
-                  <Link
-                    to={`/details?dayId=${matchingDay.id}`}
-                    className="btn btn-primary card-button"
-                    role="button"
-                  >
-                    View Meals
-                  </Link>
-                </div>
-              ) : (
-                <div>
-                  <h6 className="mb-2 text-muted"> Steps: 0</h6>
-                  <h6 className="mb-2 text-muted"> Calories: 0</h6>
-                  <button
-                    type="button"
-                    className="btn btn-secondary card-button btn-sm"
-                    disabled
-                  >
-                    View Meals
-                  </button>
-                </div>
-              )}
-              <div>
-                <Link
-                  to={`/foods?entryDate=${date}`}
-                  className="btn btn-primary card-button"
-                  role="button"
-                >
-                  Add Meals
-                </Link>
+            return (
+              <div
+                key={`day-${dayIndex}`}
+                className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+              >
+                <BootstrapCard
+                  title={formatDateAsMMMDD(date)}
+                  content={
+                    <div>
+                      {matchingDay ? (
+                        <div>
+                          <h6 className="mb-2 text-muted"> Steps: {matchingDay.totalDailySteps}</h6>
+                          <h6 className="mb-2 text-muted"> Calories: {Math.round(matchingDay.totalCaloriesConsumed)}</h6>
+                          <Link
+                            to={`/details?dayId=${matchingDay.id}`}
+                            className="btn btn-primary card-button"
+                            role="button"
+                          >
+                            View Meals
+                          </Link>
+                        </div>
+                      ) : (
+                        <div>
+                          <h6 className="mb-2 text-muted"> Steps: 0</h6>
+                          <h6 className="mb-2 text-muted"> Calories: 0</h6>
+                          <button
+                            type="button"
+                            className="btn btn-secondary card-button btn-sm"
+                            disabled
+                          >
+                            View Meals
+                          </button>
+                        </div>
+                      )}
+                      <div>
+                        <Link
+                          to={`/foods?entryDate=${date}`}
+                          className="btn btn-primary card-button"
+                          role="button"
+                        >
+                          Add Meals
+                        </Link>
+                      </div>
+                      <div>
+                        <Link
+                          to={`/steps?entryDate=${date}`}
+                          className="btn btn-primary card-button"
+                          role="button"
+                        >
+                          Add Steps
+                        </Link>
+                      </div>
+                    </div>
+                  }
+                />
               </div>
-              <div>
-                <Link
-                  to={`/steps?entryDate=${date}`}
-                  className="btn btn-primary card-button"
-                  role="button"
-                >
-                  Add Steps
-                </Link>
-              </div>
-            </div>
-          }
-        />
-      </div>
-    );
-  })}
-</div>
-
+            );
+          })}
+        </div>
       </div>
     </div>
   );

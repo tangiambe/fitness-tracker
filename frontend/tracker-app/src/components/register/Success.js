@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import logo from "../../images/logo.svg";
 import shine from "../../images/shine.svg";
@@ -10,11 +10,11 @@ const Success = () => {
     // Create the request body
     const requestBody = {
       email: user.email,
-      firstName: user.fname, // Note the property name correction
-      lastName: user.lname, // Note the property name correction
+      firstName: user.fname,
+      lastName: user.lname,
       userName: user.username,
       password: user.password,
-      activityType: user.level, // Assuming 'level' is a property in your user object
+      activityType: user.level,
       age: user.age,
       height: user.height,
       weight: user.weight
@@ -33,8 +33,9 @@ const Success = () => {
         // Handle the response data here, for example, set it to state
       })
       .catch(error => {
-        console.error('Error:', error);
         // Handle errors here
+        console.error('Error:', error);
+
       });
   }, [user])
 

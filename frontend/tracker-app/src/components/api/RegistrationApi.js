@@ -1,5 +1,3 @@
-// RegistrationApi.js
-
 import React, { useState } from 'react';
 import ApiCallComponent from './ApiCallComponent';
 

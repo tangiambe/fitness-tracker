@@ -6,7 +6,6 @@ import Success from "./Success"
 import StepThree from "./StepThree"
 import StepFour from "./StepFour";
 import StepTwo from "./StepTwo"
-// import { useState } from "react";
 import { useSelector } from "react-redux";
 import '../../styles/Register.css'
 

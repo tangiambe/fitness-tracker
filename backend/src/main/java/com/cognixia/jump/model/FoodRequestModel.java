@@ -9,7 +9,6 @@ public class FoodRequestModel {
     private String food;
     private Integer quantity;
 
-    // Constructors, getters, and setters (if needed)
 
     // Default constructor
     public FoodRequestModel() {
