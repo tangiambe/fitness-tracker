@@ -95,7 +95,7 @@ public class User implements Serializable {
 	private boolean enabled = false;
 	
 
-	//Ativity Level to calculate tdee
+	//Activity Level to calculate tdee
 	@Enumerated(EnumType.STRING)
 	private ActiveType activityType = ActiveType.NONE;
 	

@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from "react-bootstrap/esm/Container";
-import {faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -58,31 +58,28 @@ const StepTwo = () => {
     refWeight.current.value = user.weight;
 
     dispatch(info({
-      ...user, age: refAge.current.value, height: refHeight.current.value, weight: refWeight.current.value}));
+      ...user, age: refAge.current.value, height: refHeight.current.value, weight: refWeight.current.value
+    }));
 
-      //eslint-disable-next-line
+    //eslint-disable-next-line
   }, [])
 
 
   useEffect(() => {
     dispatch(info({
-      ...user, age: refAge.current.value, height: refHeight.current.value, weight: refWeight.current.value}));
-      
-      //eslint-disable-next-line
+      ...user, age: refAge.current.value, height: refHeight.current.value, weight: refWeight.current.value
+    }));
+
+    //eslint-disable-next-line
   }, [account.age, account.height, account.weight]);
 
 
-  
+
 
   const AGE_REGEX = /^(?:1[01][0-9]|120|1[3-9]|[2-9][0-9])$/
-  // const SEX_REGEX = /male/
   const HEIGHT_REGEX = /^(?:4[8-9]|[5-8][0-9])$/
   const WEIGHT_REGEX = /^([1-6][0-9][0-9]|[7-9][0-9])$/
 
-  // const checked = e => {
-  //   return SEX_REGEX.test(e);
-  // }
-  
   const validAge = e => {
     return AGE_REGEX.test(e);
   }
@@ -100,104 +97,104 @@ const StepTwo = () => {
       <h2>Hi <span>{user.fname}</span>, tell us a little bit more about you!</h2>
       <p>All fields are required.</p>
       <Container className="dflex">
-      <div className="form pt-2 ps-5">
-        <Row>
-          <Col>
-            <div className="details dflex">
-              <Form.Label>
-                Sex
-              </Form.Label>
-            </div>
-            <div className="details">
-              <Form.Label>
-                <input type="radio" label="Male" value="Male" name="option" onClick={() => setSex({ male: true, female: false })} />
-                &nbsp;&nbsp;Male</Form.Label>
-
-              <Form.Label style={{ paddingLeft: 20 }}>
-                <input type="radio" label="Female" value="Female" name="option" onClick={() => setSex({ male: false, female: true })} />
-                &nbsp;&nbsp;Female</Form.Label>
-            </div>
-          </Col>
-          <Col>
-            <div className="details">
-              <div className="fields ps-3">
-                <div className="details dflex">
+        <div className="form pt-2 ps-5">
+          <Row>
+            <Col>
+              <div className="details dflex">
                 <Form.Label>
-                Age
-              </Form.Label>
-                  {user.nextClick && (
-                    <span>{user.age === "" ? "This field is required" : !validAge(user.age)}</span>
-                  )}
-                </div>
-                <Form.Control
-                  required
-                  type="text"
-                  ref={refAge}
-                  autoComplete="off"
-                  className={!validAge(user.age) && user.nextClick ? "erorr" : ""}
-                  onChange={e => setAcc({ ...account, age: e.target.value })}
-                />
-
-                <Form.Text id="uidnote" className={user.age && validAge(user.age) ? "offscreen" : "instructions"}>
-                  <FontAwesomeIcon icon={faInfoCircle} />
-                  Must be 13 years or older
-                </Form.Text>
+                  Sex
+                </Form.Label>
               </div>
-            </div>
-          </Col>
-        </Row>
-
-        <Row>
-          
-        <Col>
-            <div className="details">
-              <div className="fields">
-                <div className="details dflex mt-5">
+              <div className="details">
                 <Form.Label>
-                Height
-              </Form.Label>
-                  {user.nextClick && (
-                    <span>{user.height === "" ? "This field is required" : !validHeight(user.height)}</span>
-                  )}
-                </div>
-                <Form.Control
-                  required
-                  type="text"
-                  ref={refHeight}
-                  autoComplete="off"
-                  placeholder="in."
-                  className={!validHeight(user.height) && user.nextClick ? "erorr" : ""}
-                  onChange={e => setAcc({ ...account, height: e.target.value })}
-                />
+                  <input type="radio" label="Male" value="Male" name="option" onClick={() => setSex({ male: true, female: false })} />
+                  &nbsp;&nbsp;Male</Form.Label>
 
+                <Form.Label style={{ paddingLeft: 20 }}>
+                  <input type="radio" label="Female" value="Female" name="option" onClick={() => setSex({ male: false, female: true })} />
+                  &nbsp;&nbsp;Female</Form.Label>
               </div>
-            </div>
-          </Col>
-          <Col>
-            <div className="details">
-              <div className="fields ms-2 ps-1">
-                <div className="details dflex mt-5">
-                <Form.Label>
-                Weight
-              </Form.Label>
-                  {user.nextClick && (
-                    <span>{user.weight === "" ? "This field is required" : !validWeight(user.weight)}</span>
-                  )}
+            </Col>
+            <Col>
+              <div className="details">
+                <div className="fields ps-3">
+                  <div className="details dflex">
+                    <Form.Label>
+                      Age
+                    </Form.Label>
+                    {user.nextClick && (
+                      <span>{user.age === "" ? "This field is required" : !validAge(user.age)}</span>
+                    )}
+                  </div>
+                  <Form.Control
+                    required
+                    type="text"
+                    ref={refAge}
+                    autoComplete="off"
+                    className={!validAge(user.age) && user.nextClick ? "erorr" : ""}
+                    onChange={e => setAcc({ ...account, age: e.target.value })}
+                  />
+
+                  <Form.Text id="uidnote" className={user.age && validAge(user.age) ? "offscreen" : "instructions"}>
+                    <FontAwesomeIcon icon={faInfoCircle} />
+                    Must be 13 years or older
+                  </Form.Text>
                 </div>
-                <Form.Control
-                  required
-                  type="text"
-                  ref={refWeight}
-                  autoComplete="off"
-                  placeholder="lbs"
-                  className={!validWeight(user.weight) && user.nextClick ? "erorr" : ""}
-                  onChange={e => setAcc({ ...account, weight: e.target.value })}
-                />
               </div>
-            </div>
-          </Col>
-        </Row>
-      </div>
+            </Col>
+          </Row>
+
+          <Row>
+
+            <Col>
+              <div className="details">
+                <div className="fields">
+                  <div className="details dflex mt-5">
+                    <Form.Label>
+                      Height
+                    </Form.Label>
+                    {user.nextClick && (
+                      <span>{user.height === "" ? "This field is required" : !validHeight(user.height)}</span>
+                    )}
+                  </div>
+                  <Form.Control
+                    required
+                    type="text"
+                    ref={refHeight}
+                    autoComplete="off"
+                    placeholder="in."
+                    className={!validHeight(user.height) && user.nextClick ? "erorr" : ""}
+                    onChange={e => setAcc({ ...account, height: e.target.value })}
+                  />
+
+                </div>
+              </div>
+            </Col>
+            <Col>
+              <div className="details">
+                <div className="fields ms-2 ps-1">
+                  <div className="details dflex mt-5">
+                    <Form.Label>
+                      Weight
+                    </Form.Label>
+                    {user.nextClick && (
+                      <span>{user.weight === "" ? "This field is required" : !validWeight(user.weight)}</span>
+                    )}
+                  </div>
+                  <Form.Control
+                    required
+                    type="text"
+                    ref={refWeight}
+                    autoComplete="off"
+                    placeholder="lbs"
+                    className={!validWeight(user.weight) && user.nextClick ? "erorr" : ""}
+                    onChange={e => setAcc({ ...account, weight: e.target.value })}
+                  />
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Container>
     </div>
   );
