@@ -7,8 +7,8 @@ export const userSlice = createSlice({
     value: {
       id: "-1",
       fname: "",
-      lname:"",
-      username:"",
+      lname: "",
+      username: "",
       email: "",
       password: "",
       sex: "",
@@ -16,8 +16,8 @@ export const userSlice = createSlice({
       height: "",
       weight: "",
       timezone: timeZone,
-      level:"",
-      goal:"",
+      level: "",
+      goal: "",
       nextClick: false
     },
   },
@@ -26,8 +26,7 @@ export const userSlice = createSlice({
       state.value = action.payload;
     },
     login: (state, action) => {
-      const {_id, firstName, lastName, username, email, password, sex, height, weight, timezone, level, goal} = action.payload;
-      // console.log(`Action.payload: ${JSON.stringify(action.payload)}`)
+      const { _id, firstName, lastName, username, email, password, sex, height, weight, timezone, level, goal } = action.payload;
       state._id = _id;
       state.firstName = firstName;
       state.lastName = lastName;
@@ -40,8 +39,8 @@ export const userSlice = createSlice({
       state.timezone = timezone;
       state.level = level;
       state.goal = goal;
-  },
-  logout: (state) => {
+    },
+    logout: (state) => {
       state._id = "-1";
       state.firstName = "";
       state.lastName = "";
@@ -55,7 +54,7 @@ export const userSlice = createSlice({
       state.level = "";
       state.goal = "";
       state.nextClick = false;
-  }
+    }
   },
 });
 export const { info, login, logout } = userSlice.actions;

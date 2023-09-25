@@ -26,8 +26,8 @@ export const Foods = () => {
         if ((activeUser.firstName === undefined) && (userId === -1)) {
             navigate("/login");
         }
-      }, [activeUser, navigate]);
-      console.log(activeUser.firstName)
+    }, [activeUser, navigate]);
+    console.log(activeUser.firstName)
 
     const addMealApiUrl = `http://localhost:8080/api/request/addfood`;
 
@@ -50,12 +50,9 @@ export const Foods = () => {
         // Make the POST request using Axios
         axios.post(addMealApiUrl, requestBody)
             .then((response) => {
-                // Handle the successful response here
-                //setDaysId(response.data);
-             //   console.log('Days Id:', response.data);
                 console.log('Response Data:', response.data);
 
-              navigate(`/details?dayId=${response.data}`);
+                navigate(`/details?dayId=${response.data}`);
             })
 
             .catch((error) => {
@@ -69,7 +66,6 @@ export const Foods = () => {
                     setFoodError("Error, please try again.");
                 }
             });
-           // console.log(requestBody);
     };
 
     return (
@@ -118,11 +114,11 @@ export const Foods = () => {
                         </Form>
                     </Container>
                     <Container className="text-center">
-                        <Button 
+                        <Button
                             onClick={() => navigate('/dashboard')}
                             className="back-btn">
                             Return to Dashboard
-                        </Button>                    
+                        </Button>
                     </Container>
                 </Col>
             </Container>

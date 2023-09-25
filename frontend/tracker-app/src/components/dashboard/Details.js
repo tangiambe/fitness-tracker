@@ -5,8 +5,6 @@ import { Container, Col } from 'react-bootstrap';
 import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Cookies from 'js-cookie';
-
-
 import '../../styles/Details.css';
 
 export const Details = () => {
@@ -46,8 +44,6 @@ export const Details = () => {
   }, [dayId, daysApiUrl]);
 
 
-  // console.log(daysData.entryDate[1] + '/' + daysData.entryDate[2] + '/' + daysData.entryDate[0])
-
   if (!daysData || !daysData.nutritions) {
     return <p>No nutrition data available.</p>;
   }
@@ -57,11 +53,11 @@ export const Details = () => {
     <Container fluid id="wrapper">
       <Col id="homePageCol">
         <Container className="details-page text-center mt-5">
-        <hr/>
-        <hr/>
+          <hr />
+          <hr />
           <h2>Meal Log</h2>
           <h4>Date: {daysData.entryDate[1]} / {daysData.entryDate[2]} / {daysData.entryDate[0]}</h4>
-          {/* <hr className="pb-3"></hr> */}<hr/><hr className="pb-4"/>
+          {/* <hr className="pb-3"></hr> */}<hr /><hr className="pb-4" />
           <table className="custom-table">
             {/* Table header */}
             <thead>
@@ -116,14 +112,13 @@ export const Details = () => {
           </Link>
         </Container>
         <Container className="text-center">
-          <Button 
-          onClick={() => navigate('/dashboard')}
-          className="back-btn">
+          <Button
+            onClick={() => navigate('/dashboard')}
+            className="back-btn">
             Return to Dashboard
           </Button>
         </Container>
       </Col>
     </Container>
   );
-  
 }

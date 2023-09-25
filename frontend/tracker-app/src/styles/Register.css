@@ -26,7 +26,7 @@ main {
 
 .Container {
   min-width: 940px;
-  height: 650px;
+  height: 750px;
   background-color: #27374352;
   margin: auto;
   padding: 16px 15px 15px 15px;
@@ -52,11 +52,11 @@ main {
   /* background: url("/src/assets/images/bg-sidebar-desktop.svg") no-repeat;
   background-size: contain; */
   background-image: linear-gradient(to top, #243949 0%, #517FA4 100%);
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 30px;
   border: 1px solid #FF914D;
   width: 22%;
-  height: 80%;
+  height: 90%;
   padding-top: 10px;
   border-radius: 1rem;
 }
@@ -73,8 +73,8 @@ main {
   /* padding: 17px 15px; */
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 10px;
-  margin-bottom: 8px;
+  padding-top: 12px;
+  margin-bottom: 35px;
   margin-top: 10px;
   background-color: #2B58763b;
   color: #02295a;
@@ -169,7 +169,6 @@ a {
 
 h2 {
   font-size: 32px;
-  /* margin: 15px 0; */
   color: #FFF
 }
 

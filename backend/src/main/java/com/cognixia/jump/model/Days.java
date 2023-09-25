@@ -35,7 +35,7 @@ public class Days implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tracker_id")
-    @JsonBackReference // Use this annotation to prevent serialization loop
+    @JsonBackReference // Prevents serialization loop
     private Tracker tracker;
 
     @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -26,33 +26,33 @@ export const NavBar = () => {
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg" className="fw-bold">Menu</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                        {activeUser.firstName === undefined ? (
-                                 <Nav className="justify-content-end flex-grow-1 align-items-center">
-                                     <Nav.Item className=" nav-link px-3 py-2">
-                                         <Nav.Link href="/register" className="fw-bold">
+                            {activeUser.firstName === undefined ? (
+                                <Nav className="justify-content-end flex-grow-1 align-items-center">
+                                    <Nav.Item className=" nav-link px-3 py-2">
+                                        <Nav.Link href="/register" className="fw-bold">
                                             Register
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item className="nav-link px-3 py-2">
                                         <Nav.Link href="/login" className="fw-bold">
                                             Login
-                                         </Nav.Link>
-                                     </Nav.Item>
-                                 </Nav>
-                             ) : (
-                                 <Nav className="justify-content-end flex-grow-1 align-items-center">
-                                     <Nav.Item className=" px-3 py-2">
-                                     <Link to="/dashboard" className=" nav-link text-decoration-none">
+                                        </Nav.Link>
+                                    </Nav.Item>
+                                </Nav>
+                            ) : (
+                                <Nav className="justify-content-end flex-grow-1 align-items-center">
+                                    <Nav.Item className=" px-3 py-2">
+                                        <Link to="/dashboard" className=" nav-link text-decoration-none">
                                             Dashboard
                                         </Link>
-                                     </Nav.Item>
-                                     <Nav.Item className="px-3 py-2">
-                                     <Nav.Link href="/" className="fw-bold">
+                                    </Nav.Item>
+                                    <Nav.Item className="px-3 py-2">
+                                        <Nav.Link href="/" className="fw-bold">
                                             Logout
                                         </Nav.Link>
-                                     </Nav.Item>
-                                 </Nav>
-                             )}
+                                    </Nav.Item>
+                                </Nav>
+                            )}
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>
